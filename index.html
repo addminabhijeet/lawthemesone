@@ -1237,6 +1237,120 @@ body.enroll-bar-on .counsel-pop{bottom:156px}
   .hot-badge{font-size:9.5px;padding:4px 9px;top:10px;right:10px}
   .hint-ptr{display:none}
 }
+
+/* ================================================================
+   FOOTER ENHANCEMENT — appended only, no existing rule modified
+   ================================================================ */
+
+/* .site-footer::before is claimed by two rules in the original sheet:
+   the guild-pattern rule, then the 3px gold bar whose `background`
+   shorthand wipes it. The pattern therefore never painted. Restore it
+   on the untouched ::after, layered under two ambient gold glows. */
+.site-footer{overflow:hidden}
+.site-footer::after{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 12% 16%, rgba(212,175,55,.14) 0%, transparent 55%),
+    radial-gradient(circle at 88% 94%, rgba(240,217,125,.10) 0%, transparent 52%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gfoot" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><g stroke="%23d4af37" stroke-width="0.8" fill="none" opacity="0.13"><circle cx="50" cy="50" r="30"/><path d="M50,20 L50,80 M20,50 L80,50"/></g></pattern></defs><rect width="1000" height="200" fill="url(%23gfoot)"/></svg>');
+  background-repeat:no-repeat,no-repeat,repeat;
+  background-size:auto,auto,120px 120px;
+}
+.site-footer .wrap{position:relative;z-index:2}
+
+/* --- Column headings: bright gold segment riding the existing rule --- */
+.footer-col h4{position:relative}
+.footer-col h4::after{
+  content:'';position:absolute;left:0;bottom:-1px;width:34px;height:2px;
+  background:var(--grad-gold);border-radius:2px;
+  box-shadow:0 0 10px rgba(212,175,55,.55);
+}
+
+/* --- Links: chevron that grows in on hover --- */
+.footer-col li a::before{
+  content:'\203A';display:inline-block;width:0;overflow:hidden;
+  opacity:0;color:var(--gold);vertical-align:baseline;
+  transition:width .3s ease,opacity .3s ease,margin-right .3s ease;
+}
+.footer-col li a:hover::before{width:9px;opacity:1;margin-right:5px}
+
+/* --- Contact rows become soft tiles --- */
+.footer-contact-item{
+  margin-bottom:9px;padding:8px 10px;border-radius:10px;
+  border:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,transform .35s ease;
+}
+.footer-contact-item:hover{
+  background:rgba(212,175,55,.07);
+  border-color:rgba(212,175,55,.2);
+  transform:translateX(4px);
+}
+.footer-contact-ico{
+  background:linear-gradient(135deg,rgba(212,175,55,.22),rgba(240,217,125,.06));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+/* --- Social: circular, gradient fill on hover, real icons --- */
+.social-row a{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(212,175,55,.05));
+  border:1px solid rgba(212,175,55,.38);
+  position:relative;overflow:hidden;
+}
+.social-row a::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--grad-gold);opacity:0;transition:opacity .35s ease;z-index:1;
+}
+.social-row a:hover::before{opacity:1}
+.social-row a svg{
+  width:17px;height:17px;position:relative;z-index:2;
+  fill:currentColor;transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.social-row a:hover svg{transform:scale(1.12)}
+
+/* --- Logo block --- */
+.footer-logo img{transition:transform .5s cubic-bezier(.22,1,.36,1),filter .5s ease}
+.footer-logo:hover img{
+  transform:translateY(-4px) scale(1.03);
+  filter:drop-shadow(0 12px 28px rgba(212,175,55,.48));
+}
+.footer-tag{position:relative;padding-bottom:18px}
+.footer-tag::after{
+  content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:56px;height:2px;border-radius:2px;background:var(--grad-gold);opacity:.75;
+}
+
+/* --- Structure: bridge the two stacked grids, divide the columns --- */
+.site-footer .footer-grid + .footer-grid{
+  padding-top:30px;border-top:1px solid rgba(212,175,55,.1);
+}
+@media(min-width:1025px){
+  .footer-col + .footer-col{
+    border-left:1px solid rgba(212,175,55,.1);padding-left:30px;
+  }
+}
+
+/* --- Bottom bar: pipe separators become gold dots, links get an underline --- */
+.footer-links .sep{
+  font-size:0;width:4px;height:4px;border-radius:50%;
+  background:rgba(212,175,55,.5);display:inline-block;vertical-align:middle;
+}
+.footer-links a{position:relative;padding-bottom:2px}
+.footer-links a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--grad-gold);transition:width .32s ease;
+}
+.footer-links a:hover::after{width:100%}
+.footer-bottom{margin-top:6px}
+
+@media(max-width:1024px){
+  .footer-col + .footer-col{border-left:none;padding-left:0}
+}
+@media(max-width:768px){
+  .site-footer .footer-grid + .footer-grid{padding-top:22px}
+  .social-row{justify-content:flex-start}
+  .footer-contact-item{padding:7px 9px}
+}
 </style>
 </head>
 <body>
@@ -2707,6 +2821,28 @@ if(prefersReducedMotion){
   else grid.parentNode.appendChild(tick);
   tick.addEventListener('click', function(e){
     if(e.target.closest('.tick-item')) goEnquire();
+  });
+})();
+
+/* ================================================================
+   FOOTER ENHANCEMENT — swap the text-glyph social marks for real
+   brand icons. Matched on the existing title attribute, so the
+   markup above is untouched and an unknown title just keeps its glyph.
+   ================================================================ */
+(function(){
+  var P = {
+    Facebook:'<path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.62c-.29-.04-1.27-.12-2.42-.12-2.4 0-4.04 1.46-4.04 4.15V9.9H7.5V13h2.74v8z"/>',
+    Twitter:'<path d="M17.53 3h2.9l-6.33 7.23L21.5 21h-5.6l-4.38-5.73L6.5 21H3.6l6.77-7.73L3 3h5.74l3.96 5.24zm-1.02 16.2h1.6L7.56 4.7H5.83z"/>',
+    Instagram:'<g fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/></g><circle cx="17.1" cy="6.9" r="1.25"/>',
+    LinkedIn:'<path d="M6.94 5.01a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0M3.3 21h3.4V8.5H3.3zM9.2 8.5h3.26v1.72h.05c.45-.86 1.56-1.77 3.22-1.77 3.44 0 4.08 2.26 4.08 5.21V21h-3.4v-5.65c0-1.35-.03-3.09-1.88-3.09-1.89 0-2.17 1.47-2.17 2.99V21H9.2z"/>',
+    YouTube:'<path d="M21.6 7.2s-.2-1.4-.8-2c-.76-.8-1.6-.8-2-.85C16 4.2 12 4.2 12 4.2h-.01s-4 0-6.79.15c-.4.05-1.24.05-2 .85-.6.6-.8 2-.8 2S2.2 8.85 2.2 10.5v1.55c0 1.65.2 3.3.2 3.3s.2 1.4.8 2c.76.8 1.76.77 2.2.86 1.6.15 6.8.2 6.8.2s4 0 6.8-.16c.4-.05 1.24-.05 2-.85.6-.6.8-2 .8-2s.2-1.65.2-3.3V10.5c0-1.65-.2-3.3-.2-3.3M9.95 14.35V8.6l5.15 2.89z"/>',
+    WhatsApp:'<path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.19-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.79.38-.27.3-1.04 1.01-1.04 2.47s1.06 2.86 1.21 3.06c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.8a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.71.97.99-3.62-.24-.38a9.82 9.82 0 0 1-1.5-5.22c0-5.42 4.42-9.83 9.83-9.83a9.77 9.77 0 0 1 6.95 2.88 9.74 9.74 0 0 1 2.88 6.96c0 5.41-4.41 9.82-9.83 9.82m8.36-18.19A11.72 11.72 0 0 0 12.05 0C5.6 0 .35 5.25.35 11.7c0 2.06.54 4.07 1.56 5.85L.25 24l6.6-1.73a11.68 11.68 0 0 0 5.19 1.24c6.45 0 11.7-5.25 11.7-11.7 0-3.13-1.22-6.07-3.43-8.28"/>'
+  };
+  document.querySelectorAll('.social-row a').forEach(function(a){
+    var key = a.getAttribute('title');
+    if(!key || !P[key]) return;              // unknown network keeps its glyph
+    a.setAttribute('aria-label', key);
+    a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + P[key] + '</svg>';
   });
 })();
 </script>
