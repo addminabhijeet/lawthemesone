@@ -618,8 +618,8 @@ ul{list-style:none}
   background:var(--grad-gold);animation:goldFlow 6s linear infinite}
 .footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-bottom:34px}
 .footer-logo{text-align:center}
-.footer-logo img{max-height:110px;width:auto;margin-bottom:14px;filter:drop-shadow(0 6px 18px rgba(212,175,55,.28))}
-.footer-tag{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--gold-light);line-height:1.55;text-align:center}
+.footer-logo img{max-height:110px;width:auto;margin-bottom:14px;filter:drop-shadow(0 6px 18px rgba(212,175,55,.28));animation:logoGlow 2.8s ease-in-out infinite}
+.footer-tag{font-family:'Playfair Display',serif;font-size:29px;font-weight:600;color:var(--gold-light);line-height:1.55;text-align:center}
 .footer-col h4{
   font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold);
   text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:9px;
@@ -672,6 +672,13 @@ ul{list-style:none}
   0%{box-shadow:0 0 0 0 rgba(212,175,55,.3)}
   50%{box-shadow:0 0 12px 4px rgba(212,175,55,.4)}
   100%{box-shadow:0 0 0 0 rgba(212,175,55,.3)}
+}
+
+/* Logo Glow Animation */
+@keyframes logoGlow{
+  0%{filter:drop-shadow(0 6px 18px rgba(212,175,55,.28))}
+  50%{filter:drop-shadow(0 8px 32px rgba(212,175,55,.6)) drop-shadow(0 0 24px rgba(240,217,125,.4))}
+  100%{filter:drop-shadow(0 6px 18px rgba(212,175,55,.28))}
 }
 
 /* ---------- HIDE STATS STRIP FROM COURSES SECTION ---------- */
