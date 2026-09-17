@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Students — Learn Law. Understand Law. Build Your Future.</title>
+<link rel="icon" href="images/logo11.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@media (prefers-reduced-motion: reduce) {
+  *{animation:none!important;transition:none!important}
+}
+:root{
+  --gold:#d4af37;
+  --gold-light:#f0d97d;
+  --gold-pale:#faf3dd;
+  --gold-dark:#a8842a;
+  --black:#12100c;
+  --ink:#1f1c16;
+  --muted:#6b6455;
+  --line:#e8dfc4;
+  --white:#ffffff;
+  --cream:#fdfbf4;
+  --grad-gold:linear-gradient(135deg,#d4af37 0%,#f0d97d 50%,#b8952e 100%);
+  --shadow-gold:0 10px 30px rgba(212,175,55,.18);
+  --shadow-soft:0 4px 18px rgba(30,26,16,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Poppins',sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  overflow-x:hidden;
+  line-height:1.7;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* ---------- SVG PATTERN BACKGROUNDS ---------- */
+@keyframes patternDrift{0%{transform:translateX(0)}100%{transform:translateX(100px)}}
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:radial-gradient(circle at 20% 50%, rgba(212,175,55,.12) 0%, transparent 70%), radial-gradient(circle at 80% 80%, rgba(240,217,125,.08) 0%, transparent 70%);
+  pointer-events:none;animation:floatOrb 19s ease-in-out infinite reverse,floatVertical 10s ease-in-out infinite;
+  width:180px;height:180px;border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:radial-gradient(circle at 30% 40%, rgba(240,217,125,.1) 0%, transparent 65%);
+  pointer-events:none;animation:floatOrb 16s ease-in-out infinite,floatVertical 8s ease-in-out infinite;
+  width:160px;height:160px;border-radius:50%;right:8%;top:12%;left:auto;
+}
+.kn-section::before{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="scales" x="0" y="0" width="150" height="150" patternUnits="userSpaceOnUse"><g stroke="%23d4af37" stroke-width="0.5" fill="none" opacity="0.15"><circle cx="75" cy="50" r="20"/><path d="M75,70 L60,90 M75,70 L90,90"/><line x1="60" y1="90" x2="90" y2="90"/></g></pattern></defs><rect width="1200" height="600" fill="none"/><rect width="1200" height="600" fill="url(%23scales)"/></svg>');background-size:150px 150px;animation:patternDrift 20s linear infinite}
+.how-section::before{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice"><defs><pattern id="pillars" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><g stroke="%23d4af37" stroke-width="1" fill="none" opacity="0.12"><rect x="80" y="20" width="40" height="150"/><path d="M70,170 L130,170 L130,180 L70,180 Z"/><path d="M70,30 L130,30 L130,20 L70,20 Z"/></g></pattern></defs><rect width="1000" height="500" fill="url(%23pillars)"/></svg>');background-size:200px 200px}
+.site-footer::before{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice"><defs><pattern id="guild" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><g stroke="%23d4af37" stroke-width="0.8" fill="none" opacity="0.13"><circle cx="50" cy="50" r="30"/><path d="M50,20 L50,80 M20,50 L80,50"/></g></pattern></defs><rect width="1000" height="200" fill="url(%23guild)"/></svg>')}
+
+/* ---------- PRELOADER ---------- */
+.se-pre-con{
+  position:fixed;inset:0;z-index:99999;
+  background:linear-gradient(135deg,#12100c 0%,#2a251b 60%,#12100c 100%);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease,visibility .6s ease;
+}
+.se-pre-con.loaded{opacity:0;visibility:hidden;pointer-events:none}
+.preloader-icon{position:relative;display:flex;align-items:center;justify-content:center}
+.preloader-icon img{width:90px;height:90px;animation:preSpin 2.4s linear infinite;filter:drop-shadow(0 0 14px rgba(212,175,55,.7));will-change:transform}
+.preloader-ring{
+  position:absolute;width:150px;height:150px;border-radius:50%;
+  border:2px solid transparent;border-top-color:var(--gold);border-right-color:var(--gold-light);
+  animation:preSpin 1.1s linear infinite;will-change:transform;
+}
+.preloader-ring.two{width:186px;height:186px;border-top-color:transparent;border-bottom-color:var(--gold-dark);animation-duration:1.7s;animation-direction:reverse}
+.preloader-text{
+  position:absolute;bottom:-90px;left:50%;transform:translateX(-50%);
+  font-family:'Playfair Display',serif;color:var(--gold);letter-spacing:5px;
+  font-size:13px;text-transform:uppercase;white-space:nowrap;
+  animation:pulseGlow 1.8s ease-in-out infinite;
+}
+@keyframes preSpin{to{transform:rotate(360deg)}}
+@keyframes pulseGlow{0%,100%{opacity:.45}50%{opacity:1;text-shadow:0 0 16px rgba(212,175,55,.8)}}
+
+/* ---------- SCROLL PROGRESS ---------- */
+.progress-wrap{
+  position:fixed;right:26px;bottom:26px;height:46px;width:46px;
+  cursor:pointer;display:block;border-radius:50%;
+  box-shadow:inset 0 0 0 2px rgba(212,175,55,.25);
+  z-index:9000;opacity:0;visibility:hidden;transform:translateY(16px);
+  transition:all .4s ease;background:rgba(18,16,12,.9);
+}
+.progress-wrap.active{opacity:1;visibility:visible;transform:translateY(0)}
+.progress-wrap::after{
+  content:'↑';position:absolute;inset:0;text-align:center;line-height:46px;
+  font-size:18px;color:var(--gold);
+}
+.progress-wrap svg path{fill:none;stroke:var(--gold);stroke-width:4;transition:all .2s linear}
+
+/* ---------- TOP BAR ---------- */
+.topbar{
+  background:linear-gradient(135deg,#12100c 0%,#2a251b 100%);
+  color:#e9e2cd;font-size:12px;padding:6px 0;
+  border-bottom:1px solid rgba(212,175,55,.22);
+  max-height:45px;overflow:hidden;
+  transition:max-height .3s ease;
+}
+.topbar.collapsed{max-height:0;padding:0;border:none}
+.topbar .wrap{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;padding:0;flex-direction:column}
+.topbar-tags{display:block;font-size:12px;color:#e9e2cd;letter-spacing:0.5px;width:100%;text-align:center;padding:4px 0}
+.topbar-tags span{color:var(--gold);margin:0 4px}
+.topbar-contact{display:flex;gap:20px;align-items:center}
+.topbar-contact a{display:flex;align-items:center;gap:6px;transition:color .3s;font-size:11px}
+.topbar-contact a:hover{color:var(--gold)}
+.topbar-contact img{width:13px;height:13px;filter:invert(74%) sepia(58%) saturate(432%) hue-rotate(2deg) brightness(92%) contrast(89%)}
+
+/* ---------- HEADER / NAV ---------- */
+.site-header{
+  position:sticky;top:0;z-index:8000;
+  background:rgba(253,251,244,.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 2px 20px rgba(30,26,16,.05);
+  transition:all .3s ease,box-shadow .3s,background .3s;
+}
+.site-header.stuck{box-shadow:0 6px 26px rgba(30,26,16,.11)}
+.site-header::after{content:'';display:block;height:3px;background:var(--grad-gold);
+  background-size:200% 100%;animation:goldFlow 6s linear infinite}
+@keyframes goldFlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0}
+.nav-logo img{height:60px;width:auto;transition:height .3s}
+.nav-menu{display:flex;align-items:center;gap:12px}
+.nav-menu > li{position:relative}
+.nav-menu > li > a{
+  font-size:13px;font-weight:600;color:var(--ink);padding:8px 0;
+  position:relative;display:inline-block;transition:color .3s;
+  white-space:nowrap;
+}
+.nav-menu > li > a::after{
+  content:'';position:absolute;left:0;bottom:0;height:2px;width:0;
+  background:var(--grad-gold);transition:width .35s ease;
+}
+.nav-menu > li > a:hover{color:var(--gold-dark)}
+.nav-menu > li > a:hover::after{width:100%}
+.has-drop > a::before{
+  content:'▾';position:relative;margin-left:4px;font-size:10px;
+  color:var(--gold-dark);top:0;right:0;
+}
+.has-drop{padding-right:0}
+.dropdown{
+  position:absolute;top:calc(100% + 10px);left:-12px;min-width:200px;
+  background:var(--white);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 16px 40px rgba(30,26,16,.13);
+  padding:6px;opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:all .3s ease;border-top:3px solid var(--gold);pointer-events:none;
+}
+.has-drop:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+.dropdown a{display:block;padding:9px 12px;font-size:13px;font-weight:500;border-radius:6px;transition:all .25s}
+.dropdown a:hover{background:var(--gold-pale);color:var(--gold-dark);padding-left:16px}
+.btn-login{
+  background:var(--grad-gold);color:var(--black);font-weight:700;font-size:12.5px;
+  padding:9px 18px;border-radius:8px;white-space:nowrap;
+  box-shadow:var(--shadow-gold);transition:all .35s ease;
+  border:1px solid rgba(212,175,55,.6);min-height:44px;display:flex;align-items:center;
+}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(212,175,55,.38);filter:brightness(1.06)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;min-width:44px;min-height:44px;justify-content:center}
+.burger span{width:24px;height:2.5px;background:var(--ink);border-radius:2px;transition:all .3s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mobile-menu{
+  display:none;border-top:1px solid var(--line);
+  max-height:0;overflow:hidden;transition:max-height .45s ease;background:var(--white);
+}
+.mobile-menu.open{max-height:820px;overflow-y:auto}
+.mobile-menu ul{padding:8px 0}
+.mobile-menu a{display:block;padding:14px 20px;font-size:14px;font-weight:500;border-bottom:1px solid #f3eeda;min-height:44px;display:flex;align-items:center;transition:all .25s}
+.mobile-menu a:hover{background:var(--gold-pale);color:var(--gold-dark)}
+.mobile-menu .sub a{padding-left:40px;font-size:13px;color:var(--muted)}
+
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 18px}
+.section{padding:70px 0;position:relative}
+.section-head{text-align:center;max-width:760px;margin:0 auto 40px}
+.eyebrow{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.2px;
+  text-transform:uppercase;color:var(--gold-dark);
+  background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(240,217,125,.08));
+  border:1px solid rgba(212,175,55,.3);
+  padding:6px 16px;border-radius:30px;margin-bottom:14px;
+  animation:fadeInScale .8s cubic-bezier(.22,1,.36,1) 0.1s both;
+}
+.section-title{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:clamp(26px,3.5vw,40px);line-height:1.2;color:var(--black);margin-bottom:12px;
+  animation:fadeInScale .9s cubic-bezier(.22,1,.36,1) 0.2s both;
+}
+.section-title .accent{
+  background:linear-gradient(135deg,#a8842a,#d4af37,#a8842a);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.section-sub{font-size:15px;color:var(--muted);line-height:1.8;animation:fadeInScale .8s cubic-bezier(.22,1,.36,1) 0.3s both}
+.title-rule{
+  width:0;height:3px;margin:12px auto 0;border-radius:3px;background:var(--grad-gold);
+  background-size:200% 100%;
+  animation:lineGrow 1s cubic-bezier(.22,1,.36,1) 0.4s forwards, goldShimmer 3s linear 0.5s infinite;
+  will-change:width;
+}
+@keyframes lineGrow{0%{width:0}100%{width:80px}}
+@keyframes fadeInScale{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1)}}
+@keyframes goldShimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* ---------- REVEAL ANIMATIONS ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition-property:opacity,transform;transition-duration:.8s;transition-timing-function:cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal[data-d="1"]{transition-delay:0.08s}
+.reveal[data-d="2"]{transition-delay:0.16s}
+.reveal[data-d="3"]{transition-delay:0.24s}
+.reveal[data-d="4"]{transition-delay:0.32s}
+
+/* List cards slide from left */
+.list-card.reveal{transform:translateX(-30px)}
+.list-card.reveal.in{transform:translateX(0)}
+
+/* Gallery/course cards scale up */
+.course-card.reveal,.album.reveal{transform:scale(.95);opacity:0}
+.course-card.reveal.in,.album.reveal.in{transform:scale(1);opacity:1}
+
+/* Course card per-row stagger */
+.course-grid .course-card:nth-child(1){--delay:0.08s}
+.course-grid .course-card:nth-child(2){--delay:0.16s}
+.course-grid .course-card:nth-child(3){--delay:0.24s}
+.course-grid .course-card:nth-child(4){--delay:0.14s}
+.course-grid .course-card:nth-child(5){--delay:0.22s}
+.course-grid .course-card:nth-child(6){--delay:0.30s}
+.course-grid .course-card:nth-child(7){--delay:0.12s}
+.course-grid .course-card:nth-child(8){--delay:0.20s}
+.course-grid .course-card:nth-child(9){--delay:0.28s}
+.course-grid .course-card{transition-delay:var(--delay,0)}
+
+/* Knowledge category cards - scale entrance + continuous float animation */
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes scaleIn{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
+
+.kn-card.reveal{
+  opacity:0;
+  transform:scale(0.8);
+  transition:all .5s cubic-bezier(.22,1,.36,1);
+}
+.kn-card.reveal.in{
+  opacity:1;
+  transform:scale(1);
+  animation:floatCard 3s ease-in-out infinite;
+}
+
+/* How-it-works count-up effect */
+.how-num{animation:countUp 1.2s cubic-bezier(.22,1,.36,1) forwards;animation-delay:0.3s}
+@keyframes countUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* Hero parallax floats - now handled in SVG pattern backgrounds section */
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-35px) scale(1.12)}}
+@keyframes floatVertical{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
+
+/* Button shimmer on hover */
+.btn-gold,.btn:hover{
+  background-size:200% 100%;
+  background-position:0% 50%;
+}
+.btn-gold:hover{animation:buttonShimmer .6s ease}
+@keyframes buttonShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:100% 50%}}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;overflow:hidden;color:#f5efdd;
+  background:linear-gradient(125deg,#0d0b08 0%,#1c1913 32%,#3a3120 58%,#1c1913 80%,#0d0b08 100%);
+  background-size:320% 320%;
+  animation:heroShift 22s ease infinite;
+  padding:90px 0 100px;
+}
+@keyframes heroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero-inner{position:relative;z-index:2;text-align:center}
+.hero-logo{
+  height:150px;width:auto;margin:0 auto 20px;
+  filter:drop-shadow(0 12px 34px rgba(212,175,55,.42));
+  animation:logoFloat 5.5s ease-in-out infinite;will-change:transform;
+}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(36px,6.2vw,68px);line-height:1.08;margin-bottom:6px;
+  background:linear-gradient(135deg,#f7e9b4 0%,#d4af37 42%,#f0d97d 70%,#b8952e 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 7s linear infinite;
+}
+@keyframes shine{to{background-position:220% center}}
+.hero-tag{
+  font-family:'Playfair Display',serif;font-size:clamp(15px,2.2vw,24px);
+  font-weight:600;color:var(--gold-light);margin-bottom:16px;letter-spacing:.3px;
+}
+.hero-desc{max-width:720px;margin:0 auto 30px;font-size:15px;color:#cfc7ae;line-height:1.8}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:13px 28px;border-radius:8px;
+  font-weight:700;font-size:13px;letter-spacing:.2px;
+  transition:all .38s cubic-bezier(.22,1,.36,1);cursor:pointer;border:none;
+  font-family:'Poppins',sans-serif;min-height:44px;display:flex;align-items:center;
+}
+.btn-gold{background:var(--grad-gold);color:var(--black);box-shadow:0 8px 26px rgba(212,175,55,.32)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(212,175,55,.48);filter:brightness(1.07)}
+.btn-ghost{background:transparent;color:var(--gold-light);border:1.5px solid rgba(212,175,55,.5);transition:all .35s}
+.btn-ghost:hover{background:rgba(212,175,55,.12);border-color:var(--gold);transform:translateY(-3px)}
+
+/* ---------- ABOUT ---------- */
+.about-section{background:linear-gradient(180deg,var(--white) 0%,var(--gold-pale) 100%);position:relative}
+.about-section::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5
+}
+.about-card{
+  max-width:920px;margin:0 auto;text-align:center;
+  background:var(--white);border:1px solid var(--line);
+  border-radius:14px;padding:42px 38px;
+  box-shadow:var(--shadow-soft);position:relative;overflow:hidden;
+}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-gold)}
+.about-card p{font-size:15px;color:var(--muted);line-height:1.9}
+
+/* ---------- COURSE CARDS ---------- */
+.courses-section{background:var(--white);position:relative}
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.course-card{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow-soft);transition:all .42s cubic-bezier(.22,1,.36,1);
+  display:flex;flex-direction:column;position:relative;will-change:transform;
+}
+.course-card:hover{transform:translateY(-8px);box-shadow:0 22px 46px rgba(212,175,55,.2);border-color:rgba(212,175,55,.48)}
+.course-thumb{height:190px;overflow:hidden;background:var(--gold-pale);position:relative}
+.course-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.course-card:hover .course-thumb img{transform:scale(1.08)}
+.course-thumb::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(18,16,12,.38) 100%)}
+.course-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.course-body h3{
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:700;
+  color:var(--black);line-height:1.35;margin-bottom:8px;
+}
+.course-body p{font-size:12.5px;color:var(--muted);line-height:1.65;margin-bottom:14px;flex:1}
+.course-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:12px;border-top:1px dashed var(--line)}
+.course-price{font-weight:800;font-size:15px;color:var(--gold-dark)}
+.course-link{font-size:12px;font-weight:700;color:var(--black);transition:all .3s;white-space:nowrap}
+.course-card:hover .course-link{color:var(--gold-dark);letter-spacing:.3px}
+.section-cta{text-align:center;margin-top:40px}
+
+/* ---------- LIST CARDS ---------- */
+.list-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.list-card{
+  display:flex;align-items:flex-start;gap:13px;
+  padding:16px 18px;border-radius:10px;
+  background:linear-gradient(135deg,var(--white) 0%,var(--gold-pale) 100%);
+  border:1px solid var(--line);border-left:4px solid var(--gold);
+  box-shadow:0 2px 10px rgba(212,175,55,.08);
+  transition:all .38s cubic-bezier(.22,1,.36,1);will-change:transform;
+  cursor:pointer;
+}
+.list-card:hover{
+  transform:translateX(6px);
+  box-shadow:0 12px 30px rgba(212,175,55,.18);
+  border-left-color:var(--gold-dark);
+  background:linear-gradient(135deg,var(--gold-pale) 0%,var(--white) 100%);
+}
+.list-icon{
+  flex-shrink:0;width:44px;height:44px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(240,217,125,.1));
+  border:1px solid rgba(212,175,55,.28);
+  transition:all .38s;will-change:transform;
+}
+.list-card:hover .list-icon{transform:scale(1.1) rotate(-5deg);box-shadow:0 0 16px rgba(212,175,55,.4)}
+.list-body{flex:1;min-width:0}
+.list-body h4{font-size:14px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:5px}
+.list-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.list-meta .pdf{font-size:12px;color:var(--muted)}
+.list-meta .go{font-size:12px;font-weight:700;color:var(--gold-dark);transition:all .3s}
+.list-card:hover .list-meta .go{letter-spacing:.4px}
+
+.notes-section{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--white) 100%);position:relative}
+.acts-section{background:var(--white);position:relative}
+.rules-section{background:linear-gradient(135deg,#faf7ec 0%,#f5eeda 100%);position:relative}
+.exams-section{background:linear-gradient(180deg,var(--white) 0%,var(--gold-pale) 100%);position:relative}
+.updates-section{background:var(--white);position:relative}
+
+/* ---------- LEGAL KNOWLEDGE CATEGORIES ---------- */
+.kn-section{
+  background:linear-gradient(135deg,#12100c 0%,#231f17 55%,#12100c 100%);
+  color:#efe8d3;position:relative;overflow:hidden;
+}
+.kn-section::before{
+  content:'';position:absolute;inset:0;
+  opacity:0.4;animation:patternDrift 25s linear infinite;
+}
+.kn-section .wrap{position:relative;z-index:2}
+.kn-section .section-title{color:#f5efdd}
+.kn-section .section-sub{color:#b8b099}
+.kn-section .eyebrow{color:var(--gold-light);background:rgba(212,175,55,.11);border-color:rgba(212,175,55,.32)}
+.kn-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:18px;
+  padding:10px 0;
+  position:relative;
+  z-index:1;
+}
+.kn-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(212,175,55,.05));
+  border:1px solid rgba(212,175,55,.2);
+  border-radius:9px;
+  padding:18px 12px;
+  text-align:center;
+  transition:all .38s cubic-bezier(.22,1,.36,1);
+  min-height:100px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  will-change:transform;
+  cursor:pointer;
+  word-break:break-word;
+  overflow:hidden;
+  position:relative;
+  z-index:2;
+}
+@keyframes hoverLift{0%{transform:scale(1.05) translateY(-12px)}50%{transform:scale(1.08) translateY(-16px)}100%{transform:scale(1.05) translateY(-12px)}}
+
+.kn-card:hover{
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(240,217,125,.08));
+  border-color:var(--gold);
+  box-shadow:0 16px 36px rgba(212,175,55,.35);
+  z-index:10;
+  animation:hoverLift 1s ease-in-out infinite;
+}
+.kn-card h5{
+  font-size:10px;font-weight:600;line-height:1.3;color:#efe8d3;
+  margin-bottom:4px;word-break:break-word;
+}
+.kn-card span{font-size:7.5px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--gold)}
+
+/* ---------- FORMS ---------- */
+.form-section{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--white) 100%);position:relative}
+.enquiry-section{background:linear-gradient(180deg,var(--white) 0%,var(--gold-pale) 100%);position:relative}
+.form-card{
+  max-width:840px;margin:0 auto;background:var(--white);
+  border:1px solid var(--line);border-radius:14px;padding:36px 32px;
+  box-shadow:var(--shadow-soft);position:relative;overflow:hidden;
+}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad-gold)}
+.form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:600;color:var(--ink)}
+.field input,.field select,.field textarea{
+  font-family:'Poppins',sans-serif;font-size:13px;color:var(--ink);
+  padding:11px 13px;border:1.4px solid var(--line);border-radius:7px;
+  background:var(--cream);transition:all .3s;outline:none;width:100%;
+  min-height:44px;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--gold);background:var(--white);
+  box-shadow:0 0 0 4px rgba(212,175,55,.12);
+}
+.field textarea{resize:vertical;min-height:110px}
+.form-note{
+  margin-top:18px;padding:14px 16px;border-radius:8px;
+  background:var(--gold-pale);border-left:3px solid var(--gold);
+  font-size:11.5px;color:var(--muted);line-height:1.7;
+}
+.form-actions{text-align:center;margin-top:6px}
+
+/* ---------- WHY US ---------- */
+.why-section{background:var(--white);position:relative}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{
+  background:linear-gradient(135deg,var(--white) 0%,var(--gold-pale) 100%);
+  border:1px solid var(--line);border-radius:12px;padding:28px 24px;
+  transition:all .42s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;
+  will-change:transform;cursor:pointer;
+}
+.why-card::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:var(--grad-gold);transform:scaleX(0);transform-origin:left;transition:transform .45s;
+}
+.why-card:hover{transform:translateY(-7px);box-shadow:0 20px 42px rgba(212,175,55,.18);border-color:rgba(212,175,55,.42)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-icon{
+  width:52px;height:52px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(240,217,125,.1));
+  border:1px solid rgba(212,175,55,.28);transition:all .42s;will-change:transform;
+}
+.why-card:hover .why-icon{transform:rotate(-7deg) scale(1.07);box-shadow:0 0 20px rgba(212,175,55,.42)}
+.why-card h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--black);margin-bottom:9px}
+.why-card p{font-size:13px;color:var(--muted);line-height:1.75}
+
+/* ---------- HOW IT WORKS ---------- */
+.how-section{
+  background:linear-gradient(135deg,#12100c 0%,#231f17 55%,#12100c 100%);
+  color:#efe8d3;position:relative;overflow:hidden;
+}
+.how-section::before{
+  content:'';position:absolute;inset:0;opacity:0.35;
+}
+.how-section .wrap{position:relative;z-index:2}
+.how-section .section-title{color:#f5efdd}
+.how-section .section-sub{color:#b8b099}
+.how-section .eyebrow{color:var(--gold-light);background:rgba(212,175,55,.11);border-color:rgba(212,175,55,.32)}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.how-card{
+  background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(212,175,55,.05));
+  border:1px solid rgba(212,175,55,.2);border-radius:12px;
+  padding:28px 22px;text-align:center;transition:all .42s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+.how-card:hover{transform:translateY(-7px);border-color:var(--gold);box-shadow:0 16px 36px rgba(212,175,55,.22);
+  background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(240,217,125,.06))}
+.how-num{
+  font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1;margin-bottom:12px;
+  background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.how-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#f5efdd;margin-bottom:8px}
+.how-card p{font-size:12.5px;color:#b8b099;line-height:1.7}
+
+/* ---------- GALLERY ---------- */
+.gallery-section{background:linear-gradient(180deg,var(--gold-pale) 0%,var(--white) 100%);position:relative}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.album{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  box-shadow:var(--shadow-soft);transition:all .42s cubic-bezier(.22,1,.36,1);
+  will-change:transform;cursor:pointer;
+}
+.album:hover{transform:translateY(-7px);box-shadow:0 22px 44px rgba(212,175,55,.2);border-color:rgba(212,175,55,.42)}
+.album-imgs{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;height:160px;background:var(--gold-pale)}
+.album-imgs.single{grid-template-columns:1fr}
+.album-imgs img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.album:hover .album-imgs img{transform:scale(1.08)}
+.album-body{padding:15px 16px;text-align:center}
+.album-body h4{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--black);margin-bottom:4px}
+.album-body span{font-size:11.5px;color:var(--gold-dark);font-weight:600}
+
+/* ---------- CONTACT ---------- */
+.contact-section{background:var(--white);position:relative}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.contact-intro p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:26px}
+.contact-items{display:flex;flex-direction:column;gap:14px}
+.contact-item{
+  display:flex;align-items:flex-start;gap:14px;padding:15px 17px;border-radius:10px;
+  background:linear-gradient(135deg,var(--white) 0%,var(--gold-pale) 100%);
+  border:1px solid var(--line);border-left:4px solid var(--gold);
+  transition:all .38s cubic-bezier(.22,1,.36,1);will-change:transform;
+}
+.contact-item:hover{transform:translateX(6px);box-shadow:0 12px 28px rgba(212,175,55,.17);border-left-color:var(--gold-dark)}
+.contact-ico{
+  flex-shrink:0;width:42px;height:42px;border-radius:9px;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(212,175,55,.18),rgba(240,217,125,.1));
+  border:1px solid rgba(212,175,55,.28);transition:all .38s;will-change:transform;
+}
+.contact-item:hover .contact-ico{transform:scale(1.08);box-shadow:0 0 16px rgba(212,175,55,.4)}
+.contact-item h5{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gold-dark);margin-bottom:3px}
+.contact-item p{font-size:13px;color:var(--ink);line-height:1.6}
+
+/* ---------- FOOTER ---------- */
+.site-footer{
+  background:linear-gradient(135deg,#0d0b08 0%,#1c1913 50%,#0d0b08 100%);
+  color:#c9c1a9;padding:50px 0 0;position:relative;
+}
+.site-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad-gold);background-size:200% 100%;animation:goldFlow 6s linear infinite}
+.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-bottom:34px}
+.footer-logo img{max-height:110px;width:auto;margin-bottom:14px;filter:drop-shadow(0 6px 18px rgba(212,175,55,.28))}
+.footer-tag{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--gold-light);line-height:1.55}
+.footer-col h4{
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold);
+  text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;padding-bottom:9px;
+  border-bottom:1px solid rgba(212,175,55,.24);
+}
+.footer-col li{margin-bottom:8px}
+.footer-col li a{font-size:13px;color:#c9c1a9;transition:all .3s;display:inline-block}
+.footer-col li a:hover{color:var(--gold);transform:translateX(4px)}
+.footer-contact-item{display:flex;gap:11px;align-items:flex-start;margin-bottom:14px}
+.footer-contact-ico{
+  flex-shrink:0;width:40px;height:40px;border-radius:8px;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(212,175,55,.13);border:1px solid rgba(212,175,55,.26);transition:all .35s;will-change:transform;
+}
+.footer-contact-item:hover .footer-contact-ico{background:rgba(212,175,55,.28);box-shadow:0 0 14px rgba(212,175,55,.38);transform:scale(1.08)}
+.footer-contact-item h6{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gold);margin-bottom:2px}
+.footer-contact-item p{font-size:12.5px;color:#c9c1a9;line-height:1.55}
+.social-row{display:flex;gap:9px;flex-wrap:wrap}
+.social-row a{
+  width:40px;height:40px;border-radius:9px;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(212,175,55,.11);border:1px solid rgba(212,175,55,.26);
+  transition:all .38s cubic-bezier(.22,1,.36,1);will-change:transform;
+}
+.social-row a:hover{background:var(--grad-gold);color:var(--black);transform:translateY(-4px) scale(1.08);box-shadow:0 10px 22px rgba(212,175,55,.4)}
+.footer-bottom{
+  border-top:1px solid rgba(212,175,55,.2);padding:18px 0;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+.footer-links{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;align-items:center}
+.footer-links a{color:#c9c1a9;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-links .sep{color:rgba(212,175,55,.35)}
+.copyright{font-size:12px;color:#9a937f}
+
+/* ---------- WHATSAPP FLOAT ---------- */
+.wa-float{
+  position:fixed;left:20px;bottom:20px;width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:26px;
+  display:flex;align-items:center;justify-content:center;z-index:9000;
+  box-shadow:0 8px 24px rgba(37,211,102,.4);transition:all .38s;
+  animation:waPulse 2.6s ease-in-out infinite;will-change:transform;
+  min-height:44px;min-width:44px;
+}
+.wa-float:hover{transform:scale(1.12)}
+@keyframes waPulse{0%,100%{box-shadow:0 8px 24px rgba(37,211,102,.4)}50%{box-shadow:0 8px 32px rgba(37,211,102,.7)}}
+
+/* ---------- ENHANCED SECTION-SPECIFIC ANIMATIONS ---------- */
+
+/* Preloader: curtain split reveal */
+@keyframes curtainSplitLeft{from{transform:translateX(0);opacity:1}to{transform:translateX(-100%);opacity:0}}
+@keyframes curtainSplitRight{from{transform:translateX(0);opacity:1}to{transform:translateX(100%);opacity:0}}
+.se-pre-con.loaded{animation:none}
+
+/* Split-letter stagger for hero title */
+@keyframes splitLetterRise{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+.hero h1{animation:shine 7s linear infinite,fadeInScale .9s cubic-bezier(.22,1,.36,1) 0.2s both}
+
+/* Typewriter effect on hero tagline */
+@keyframes typewriter{0%{opacity:0;transform:translateX(-10px)}100%{opacity:1;transform:translateX(0)}}
+.hero-tag{animation:typewriter .8s cubic-bezier(.22,1,.36,1) 0.4s both}
+
+/* Hero canvas particle field (simulated with background) */
+@keyframes particleFloat{0%{opacity:0}15%{opacity:.8}85%{opacity:.8}100%{opacity:0}}
+.hero::after{animation:floatOrb 16s ease-in-out infinite,floatVertical 8s ease-in-out infinite,particleFloat 8s ease-in-out infinite}
+
+/* Button magnetic pull effect */
+@keyframes magneticPull{0%{transform:translate(0,0)}50%{transform:translate(-4px,-2px)}100%{transform:translate(0,0)}}
+.btn-gold:hover{animation:magneticPull .4s ease-out}
+
+/* About section: word-by-word mask reveal + SVG border */
+@keyframes wordReveal{0%{clip-path:inset(0 100% 0 0);opacity:0}100%{clip-path:inset(0 0 0 0);opacity:1}}
+.about-card p{animation:fadeInScale .9s cubic-bezier(.22,1,.36,1) 0.3s both;line-height:1.9}
+.about-card::before{animation:slideInLeft .7s cubic-bezier(.22,1,.36,1) 0.5s both}
+@keyframes drawBorder{from{stroke-dashoffset:300;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+
+/* Course card 3D tilt */
+.course-card{perspective:1000px;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.course-card:hover{transform:rotateX(-4deg) rotateY(4deg)}
+
+/* Ken Burns zoom on course images */
+@keyframes kenBurns{0%{transform:scale(1)}100%{transform:scale(1.12)}}
+.course-card:hover .course-thumb img{animation:kenBurns 1.4s cubic-bezier(.22,1,.36,1) forwards}
+
+/* Course price count-up animation (enhanced via JS) */
+.course-price{position:relative}
+
+/* Free Notes: alternating entrance + emoji badge flip */
+.notes-section .list-card:nth-child(odd){animation:slideInLeft .8s cubic-bezier(.22,1,.36,1) both}
+.notes-section .list-card:nth-child(even){animation:slideInRight .8s cubic-bezier(.22,1,.36,1) both}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+/* Emoji badge 3D flip */
+@keyframes flipY{0%{transform:rotateY(90deg);opacity:0}100%{transform:rotateY(0);opacity:1}}
+.list-icon{animation:flipY .7s cubic-bezier(.22,1,.36,1) both}
+
+/* Bare Acts: horizontal marquee ticker + stamp effect */
+@keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+@keyframes marqueeLoop{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.acts-section .list-card{animation:slideInLeft .8s cubic-bezier(.22,1,.36,1) both}
+@keyframes stampEffect{0%{transform:scale(1.08);opacity:0;box-shadow:0 8px 16px rgba(212,175,55,.3)}100%{transform:scale(1);opacity:1;box-shadow:0 2px 10px rgba(212,175,55,.08)}}
+.acts-section .list-card.in{animation:stampEffect .6s cubic-bezier(.22,1,.36,1)}
+.acts-ticker{white-space:nowrap;overflow:hidden;animation:marqueeLoop 25s linear infinite;will-change:transform}
+
+/* Rules: expand height on hover + scales emoji swing */
+@keyframes pendulum{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}100%{transform:rotate(-8deg)}}
+.rules-section .list-card:hover .list-icon{animation:pendulum 1.2s ease-in-out}
+
+/* Legal Knowledge: magnetic cards + ripple on click */
+@keyframes ripple{0%{width:0;opacity:1}100%{width:300px;opacity:0}}
+
+/* Inquiry Form: floating labels + border draw-in + liquid fill */
+@keyframes labelFloat{0%{transform:translateY(0);opacity:.7}100%{transform:translateY(-24px);opacity:1;font-size:11px}}
+@keyframes labelFloatOut{0%{transform:translateY(-24px);font-size:11px}100%{transform:translateY(0);font-size:12px}}
+
+.form-section .field{position:relative}
+.form-section .field label{
+  position:absolute;top:11px;left:13px;font-size:12px;
+  transition:all .3s cubic-bezier(.22,1,.36,1);pointer-events:none;
+  background:var(--white);padding:0 2px;
+}
+.form-section .field input:focus + label,
+.form-section .field input:not(:placeholder-shown) + label{
+  animation:labelFloat .3s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+@keyframes borderDrawRight{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.form-section .field input:focus{
+  animation:borderDrawRight .35s cubic-bezier(.22,1,.36,1);
+  border-color:var(--gold);
+}
+
+@keyframes liquidFill{0%{background-position:0% 0%}100%{background-position:200% 0%}}
+.form-section .btn-gold:hover{background-size:200% 100%;animation:liquidFill .8s ease}
+
+/* Govt Exams: SVG timeline path draw + fade-in cards */
+@keyframes timelineStroke{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+.exams-section .list-card.in{animation:slideInLeft .8s cubic-bezier(.22,1,.36,1)}
+
+/* Course Enquiry: cascade up fields */
+@keyframes cascadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.enquiry-section .field{animation:cascadeUp .6s cubic-bezier(.22,1,.36,1) both}
+.enquiry-section .field:nth-child(1){animation-delay:.06s}
+.enquiry-section .field:nth-child(2){animation-delay:.12s}
+.enquiry-section .field:nth-child(3){animation-delay:.18s}
+.enquiry-section .field:nth-child(4){animation-delay:.24s}
+.enquiry-section .field:nth-child(5){animation-delay:.30s}
+.enquiry-section .field:nth-child(6){animation-delay:.36s}
+.enquiry-section .field:nth-child(7){animation-delay:.42s}
+
+/* Why Us: icon animations + card flip */
+@keyframes iconPulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.why-card .why-icon{transition:all .42s}
+.why-card:hover .why-icon{animation:iconPulse .6s ease}
+
+@keyframes cardFlipX{from{transform:rotateX(90deg);opacity:0}to{transform:rotateX(0);opacity:1}}
+.why-card.in{animation:cardFlipX .7s cubic-bezier(.22,1,.36,1)}
+
+/* How It Works: SVG connector + count-up numbers + card lift */
+@keyframes pathDraw{from{stroke-dashoffset:500}to{stroke-dashoffset:0}}
+@keyframes numberCountUp{0%{opacity:0;transform:scale(.5)}100%{opacity:1;transform:scale(1)}}
+.how-num{animation:numberCountUp 1s cubic-bezier(.22,1,.36,1) 0.3s both}
+
+@keyframes liftUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.how-card.in{animation:liftUp .7s cubic-bezier(.22,1,.36,1)}
+
+/* Latest Legal Knowledge: shimmer skeleton + sheen sweep */
+@keyframes shimmerSkeleton{0%{opacity:.4}50%{opacity:.8}100%{opacity:.4}}
+@keyframes sheenSweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.updates-section .list-card.in{animation:fadeInScale .8s cubic-bezier(.22,1,.36,1)}
+
+/* Gallery: parallax on scroll + cross-fade photos + caption slide-up */
+@keyframes photoSwap{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
+.gallery-section .album:hover .album-imgs img:first-child{animation:photoSwap 1.2s ease}
+@keyframes captionSlideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.album-body{animation:captionSlideUp .5s cubic-bezier(.22,1,.36,1)}
+
+/* Contact: icon pulse sequence + drop-and-bounce */
+@keyframes pulseSequence{0%{box-shadow:0 0 0 0 rgba(212,175,55,.6)}70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}}
+.contact-ico{animation:pulseSequence 2.4s ease-out infinite}
+
+@keyframes dropBounce{0%{opacity:0;transform:translateY(-20px)}60%{transform:translateY(4px)}100%{opacity:1;transform:translateY(0)}}
+.contact-item:first-child .contact-ico{animation:dropBounce .8s cubic-bezier(.22,1,.36,1) both}
+
+/* Footer: rise columns + top border draw + social flip + magnetic pull */
+@keyframes riseBottomToTop{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.footer-col{animation:riseBottomToTop .8s cubic-bezier(.22,1,.36,1) both}
+.footer-col:nth-child(1){animation-delay:.1s}
+.footer-col:nth-child(2){animation-delay:.2s}
+.footer-col:nth-child(3){animation-delay:.3s}
+
+@keyframes socialFlip{0%{transform:rotateY(-90deg) scale(.8);opacity:0}100%{transform:rotateY(0) scale(1);opacity:1}}
+.social-row a{
+  animation:socialFlip .6s cubic-bezier(.22,1,.36,1) both;
+  perspective:1000px;transition:all .35s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+.social-row a:hover{
+  transform:translateY(-6px) scale(1.15) rotateZ(10deg);
+}
+
+/* ---------- GLOBAL MOTION LAYER ---------- */
+
+/* Custom cursor dot with lagging outer ring */
+@keyframes cursorPulse{0%{box-shadow:0 0 0 0 rgba(212,175,55,.6)}100%{box-shadow:0 0 0 8px rgba(212,175,55,0)}}
+
+/* Smooth inertial scroll effect (lerp-based) */
+html.smooth-scroll{scroll-behavior:smooth}
+
+/* Stats counter animation (count-up) */
+@keyframes counterRoll{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* Stats section styling (can be added to hero or dedicated section) */
+.stats-strip{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;
+  margin:40px 0;animation:fadeInScale .9s cubic-bezier(.22,1,.36,1) 0.5s both;
+  padding:30px;background:linear-gradient(135deg,rgba(212,175,55,.05),rgba(240,217,125,.02));
+  border-radius:12px;border:1px solid rgba(212,175,55,.15);
+}
+.stat-item{text-align:center;padding:15px}
+.stat-value{
+  font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,40px);font-weight:900;
+  background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:counterRoll 1.2s cubic-bezier(.22,1,.36,1) both;
+  display:block;margin-bottom:6px;will-change:contents;
+}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+/* Testimonial carousel styling */
+.testimonial-carousel{
+  display:grid;grid-template-columns:1fr;gap:20px;
+  animation:fadeInScale .9s cubic-bezier(.22,1,.36,1) 0.6s both;
+}
+.testimonial-item{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;
+  padding:24px;box-shadow:var(--shadow-soft);
+  animation:slideInLeft .8s cubic-bezier(.22,1,.36,1) both;
+}
+.carousel-dots{text-align:center;margin-top:20px}
+.carousel-dots span{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--gold);margin:0 6px;cursor:pointer;opacity:.4;
+  transition:opacity .35s;animation:dotPulse .8s ease-in-out infinite;
+}
+.carousel-dots span.active{opacity:1;animation:none}
+
+/* Testimonial carousel indicators */
+@keyframes dotPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.carousel-dots span{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin:0 6px;cursor:pointer;opacity:.4;transition:opacity .35s}
+.carousel-dots span.active{animation:dotPulse .8s ease-in-out infinite}
+
+/* RESPECT PREFERS-REDUCED-MOTION for all new animations */
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation:none!important;
+    transition:none!important;
+  }
+  .hero h1, .hero-tag, .btn-gold:hover,
+  .course-card, .course-card:hover,
+  .notes-section .list-card,
+  .acts-section .list-card,
+  .rules-section .list-card:hover,
+  .kn-card, .kn-card:hover,
+  .form-section .field input:focus,
+  .form-section .field label,
+  .form-section .btn-gold:hover,
+  .why-card, .how-num, .how-card.in,
+  .updates-section .list-card.in,
+  .gallery-section .album:hover,
+  .contact-ico, .social-row a,
+  .stats-strip, .carousel-dots span.active,
+  .title-rule, .list-icon, .contact-item:first-child .contact-ico,
+  .footer-col, .about-card p, .about-card::before,
+  .nav-menu > li > a, .preloader-ring, .preloader-text{
+    transform:none!important;
+  }
+  /* Ensure content is fully visible without animations */
+  .reveal, .reveal.in{opacity:1;transform:none}
+  .course-card.reveal, .course-card.reveal.in{transform:none;opacity:1}
+  .list-card.reveal, .list-card.reveal.in{transform:none;opacity:1}
+  .album.reveal, .album.reveal.in{transform:none;opacity:1}
+  .kn-card.reveal, .kn-card.reveal.in{transform:none;opacity:1;filter:none}
+}
+
+/* ---------- RESPONSIVE: TABLET ---------- */
+@media(max-width:1200px){
+  .kn-grid{grid-template-columns:repeat(5,1fr);gap:16px}
+  .nav-menu{gap:10px}
+  .nav-menu > li > a{font-size:12px}
+}
+@media(max-width:1024px){
+  .topbar .wrap{gap:12px}
+  .topbar-contact{gap:16px}
+  .topbar-contact a{font-size:10px}
+  .nav-menu{gap:8px}
+  .nav-menu > li > a{font-size:11.5px}
+  .has-drop > a::before{font-size:9px;margin-left:3px}
+  .burger{display:flex}
+  .nav-menu,.btn-login{display:none}
+  .mobile-menu{display:block}
+  .course-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .kn-grid{grid-template-columns:repeat(4,1fr);gap:15px}
+  .kn-card{min-height:95px;padding:17px 11px}
+  .footer-grid{grid-template-columns:repeat(2,1fr);gap:30px}
+  .section{padding:60px 0}
+  .contact-layout{grid-template-columns:1fr;gap:28px}
+  .list-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .topbar{max-height:100px;padding:6px 0;border-bottom:1px solid rgba(212,175,55,.22)}
+  .topbar .wrap{flex-direction:column;gap:8px}
+  .topbar-tags{display:block;font-size:11px;padding:2px 0}
+  .topbar-contact{gap:12px}
+  .topbar-contact a{font-size:10px}
+  .section{padding:50px 0}
+  .section-head{margin-bottom:32px}
+  .nav-logo img{height:52px}
+  .burger{min-width:40px;min-height:40px;padding:6px}
+  .burger span{width:22px;height:2px}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .course-grid{grid-template-columns:repeat(2,1fr);gap:18px}
+  .hero-logo{height:120px;margin-bottom:16px}
+  .hero{padding:70px 0 80px}
+  .about-card,.form-card{padding:28px 22px}
+  .form-row{grid-template-columns:1fr;gap:12px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .kn-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:8px 0}
+  .kn-card{min-height:90px;padding:15px 9px}
+  .kn-card h5{font-size:9px;margin-bottom:3px}
+  .kn-card span{font-size:7px}
+  .contact-layout{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+  .why-grid,.how-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .wrap{padding:0 14px}
+  .topbar{max-height:120px}
+  .topbar .wrap{gap:6px}
+  .topbar-tags{font-size:10px;padding:1px 0}
+  .topbar-tags span{margin:0 3px}
+  .topbar-contact{gap:8px;width:100%;flex-wrap:wrap;justify-content:center}
+  .topbar-contact a{font-size:9px;gap:3px}
+  .topbar-contact img{width:11px;height:11px}
+  .section{padding:42px 0}
+  .hero-logo{height:100px}
+  .hero{padding:60px 0 70px}
+  .hero h1{font-size:clamp(32px,5.5vw,50px)}
+  .hero-tag{font-size:clamp(14px,2vw,20px)}
+  .hero-btns .btn{width:calc(50% - 6px);max-width:none;padding:11px 16px;font-size:12px}
+  .section-title{font-size:clamp(22px,3vw,32px)}
+  .eyebrow{font-size:10px;padding:5px 12px}
+  .course-grid,.kn-grid{grid-template-columns:1fr}
+  .list-grid{grid-template-columns:1fr}
+  .course-thumb{height:160px}
+  .album-imgs{height:140px}
+  .nav-logo img{height:44px}
+  .btn-login{display:none!important}
+  .burger{display:flex!important;min-width:44px;min-height:44px}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .wa-float{left:12px;bottom:12px;width:48px;height:48px}
+  .mobile-menu a{padding:12px 16px;font-size:13px;min-height:42px}
+  .kn-grid{gap:12px;padding:6px 0}
+  .kn-card{min-height:80px;padding:13px 7px}
+  .kn-card h5{font-size:8px;margin-bottom:2px}
+  .kn-card span{font-size:6px}
+  .kn-card:hover{transform:translateY(-6px) scale(1.03)}
+}
+@media(max-width:480px){
+  .wrap{padding:0 12px}
+  .topbar{max-height:140px}
+  .topbar .wrap{gap:5px}
+  .topbar-tags{font-size:9px;padding:1px 0}
+  .topbar-tags span{margin:0 2px}
+  .topbar-contact{gap:6px}
+  .topbar-contact a{font-size:8px;gap:2px}
+  .topbar-contact img{width:10px;height:10px}
+  .section{padding:36px 0}
+  .hero{padding:50px 0 60px}
+  .hero-logo{height:85px}
+  .hero-desc{font-size:13.5px}
+  .hero-btns{flex-direction:column}
+  .hero-btns .btn{width:100%}
+  .kn-card{min-height:75px;padding:11px 6px}
+  .kn-card h5{font-size:7px;margin-bottom:1px}
+  .kn-card span{font-size:5px}
+  .kn-grid{gap:10px;padding:4px 0}
+  .kn-card:hover{transform:translateY(-5px) scale(1.02)}
+  .btn{padding:10px 16px;font-size:12px;min-height:42px}
+  .why-card,.course-card{padding:16px}
+  .course-body h3{font-size:14px}
+  .course-body p{font-size:11.5px}
+  .footer-col h4{font-size:14px;margin-bottom:12px}
+  .footer-col li a{font-size:12px}
+  .title-rule{margin:8px auto 0}
+}
+</style>
+</head>
+<body>
+
+<!--===== PRELOADER STARTS =======-->
+<div class="se-pre-con" id="preloader">
+  <div class="preloader-icon">
+    <div class="preloader-ring"></div>
+    <div class="preloader-ring two"></div>
+    <img src="images/preloader.svg" alt="Loading" loading="eager">
+    <div class="preloader-text">Law Students</div>
+  </div>
+</div>
+<!--===== PRELOADER ENDS =======-->
+
+<!--===== SCROLL PROGRESS =======-->
+<div class="progress-wrap" id="progressWrap">
+  <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+    <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" id="progressPath"/>
+  </svg>
+</div>
+
+<!--===== TOP BAR =======-->
+<div class="topbar" id="topbar">
+  <div class="wrap">
+    <div class="topbar-tags"><span>•</span> Legal Education <span>•</span> Legal Knowledge <span>•</span> Legal Resources</div>
+    <div class="topbar-contact">
+      <a href="mailto:lawstudents.edu@gmail.com" aria-label="Email"><img src="images/icons/email3.svg" alt="">lawstudents.edu@gmail.com</a>
+      <a href="tel:+916624536320" aria-label="Phone"><img src="images/icons/phone3.svg" alt="">+916624536320</a>
+    </div>
+  </div>
+</div>
+
+<!--===== HEADER STARTS =======-->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <div class="nav-wrap">
+      <a href="#home" class="nav-logo"><img src="images/logo-full.png" alt="Law Students" loading="eager"></a>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li class="has-drop">
+            <a href="#acts">Bare Acts &amp; Rules</a>
+            <div class="dropdown">
+              <a href="#acts">Acts</a>
+              <a href="#rules">Rules</a>
+            </div>
+          </li>
+          <li><a href="#knowledge">Legal Knowledge</a></li>
+          <li class="has-drop">
+            <a href="#courses">Course &amp; Notes</a>
+            <div class="dropdown">
+              <a href="#courses">Course</a>
+              <a href="#notes">Free Notes</a>
+            </div>
+          </li>
+          <li><a href="#exams">Centre &amp; State Govt. Examination</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="btn-login">Login / Register</a>
+      <div class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#acts">Bare Acts &amp; Rules</a></li>
+      <li class="sub"><a href="#acts">Acts</a></li>
+      <li class="sub"><a href="#rules">Rules</a></li>
+      <li><a href="#knowledge">Legal Knowledge</a></li>
+      <li><a href="#courses">Course &amp; Notes</a></li>
+      <li class="sub"><a href="#courses">Course</a></li>
+      <li class="sub"><a href="#notes">Free Notes</a></li>
+      <li><a href="#exams">Centre &amp; State Govt. Examination</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+      <li><a href="#">Login / Register</a></li>
+    </ul>
+  </div>
+</header>
+<!--===== HEADER ENDS =======-->
+
+<!--===== HERO SECTION STARTS =======-->
+<section class="hero" id="home">
+  <div class="wrap hero-inner">
+    <img src="images/logo11.png" alt="Law Students" class="hero-logo" loading="eager">
+    <h1>Law Students</h1>
+    <p class="hero-tag">Learn Law. Understand Law. Build Your Future.</p>
+    <p class="hero-desc">A comprehensive platform for Legal Education, Examination Preparation, Legal Knowledge, Bare Acts, Rules, Notifications and Study Materials.</p>
+    <div class="hero-btns">
+      <a href="#courses" class="btn btn-gold">Explore Courses</a>
+      <a href="#notes" class="btn btn-ghost">Free Notes</a>
+      <a href="#knowledge" class="btn btn-ghost">Legal Knowledge</a>
+    </div>
+  </div>
+</section>
+<!--===== HERO SECTION ENDS =======-->
+
+<!--===== ABOUT SECTION STARTS =======-->
+<section class="section about-section" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">About Platform</span>
+      <h2 class="section-title">Welcome to <span class="accent">Law Student</span></h2>
+      <div class="title-rule"></div>
+    </div>
+    <div class="about-card reveal">
+      <p>Law Student is an educational and knowledge platform dedicated to students, aspirants and professionals pursuing legal and professional education. The platform provides structured courses, study materials, Bare Acts, Rules, Notifications, legal knowledge resources and examination-oriented preparation.</p>
+    </div>
+  </div>
+</section>
+<!--===== ABOUT SECTION ENDS =======-->
+
+<!--===== COURSES SECTION STARTS =======-->
+<section class="section courses-section" id="courses">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Courses</span>
+      <h2 class="section-title">Explore Our <span class="accent">Courses</span></h2>
+      <p class="section-sub">Comprehensive learning programs designed by legal experts</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="course-grid">
+      <article class="course-card reveal" data-d="1">
+        <div class="course-thumb"><img src="images/thumbnails/s0pVIlIP7uiruiggCwB1uwz1yh89SyCECOWLO8CI.png" alt="Income Tax Law" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Income Tax Law: Practice &amp; Procedure</h3>
+          <p>This course provides a structured understanding of Indian direct tax law under t...</p>
+          <div class="course-foot"><span class="course-price">₹4,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="2">
+        <div class="course-thumb"><img src="images/thumbnails/5noYnXD2kN0fXYN4KjaYEY1oLD4Yhs7bUxXMF7eG.png" alt="Corporate Law" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Corporate Law &amp; Company Secretarial Practice</h3>
+          <p>This course covers the essentials of corporate law in India, including incorpora...</p>
+          <div class="course-foot"><span class="course-price">₹2,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="3">
+        <div class="course-thumb"><img src="images/thumbnails/NGosn6wDwdLErLzDGUAwHOXd0FgHPF025dQtZ2Xw.png" alt="Civil Law" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Civil Law &amp; Procedure Fundamentals</h3>
+          <p>This course introduces students to the core principles of civil law in India, in...</p>
+          <div class="course-foot"><span class="course-price">₹1,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="1">
+        <div class="course-thumb"><img src="images/thumbnails/5noYnXD2kN0fXYN4KjaYEY1oLD4Yhs7bUxXMF7eG.png" alt="Civil Procedure Code" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Civil Procedure Code (CPC): Litigation Practice</h3>
+          <p>This course provides a practical understanding of the Code of Civil Procedure, 1...</p>
+          <div class="course-foot"><span class="course-price">₹2,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="2">
+        <div class="course-thumb"><img src="images/thumbnails/sE2scnRokkmvHIBn8JBe6mvZ68b2aEq2lwIg5TdR.png" alt="Criminal Law IPC" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Criminal Law: Indian Penal Code (IPC) Mastery</h3>
+          <p>This course offers an in-depth study of the Indian Penal Code, covering general...</p>
+          <div class="course-foot"><span class="course-price">₹1,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="3">
+        <div class="course-thumb"><img src="images/thumbnails/IlNaUnZvqfkfdpkOg6BlGgkfBkP2bJL8jHshSTrZ.png" alt="Criminal Revision" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Criminal Revision &amp; Appellate Practice</h3>
+          <p>This advanced course examines the revisional and appellate remedies available un...</p>
+          <div class="course-foot"><span class="course-price">₹9,000.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="1">
+        <div class="course-thumb"><img src="images/thumbnails/O0a5s7KB99LCrNqFP9nyA0cVpuRwrhEiOuY9XVVX.png" alt="CLAT Crash Course" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>CLAT &amp; LL.B. Entrance Crash Course</h3>
+          <p>A structured crash course designed for students preparing for CLAT and other nat...</p>
+          <div class="course-foot"><span class="course-price">₹4,999.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="2">
+        <div class="course-thumb"><img src="images/thumbnails/C4n5IEjwS7CAdGdvnkLgQQbYr3NWM8iEp5V68wfh.png" alt="Legal Aptitude" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>Legal Aptitude &amp; Reasoning Foundation</h3>
+          <p>Builds a strong foundation in legal aptitude and reasoning for students beginnin...</p>
+          <div class="course-foot"><span class="course-price">₹3,499.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+      <article class="course-card reveal" data-d="3">
+        <div class="course-thumb"><img src="images/thumbnails/5noYnXD2kN0fXYN4KjaYEY1oLD4Yhs7bUxXMF7eG.png" alt="LL.B. 3-Year Programme" loading="lazy" decoding="async"></div>
+        <div class="course-body">
+          <h3>LL.B. 3-Year Programme: Semester I-II Core Subjects</h3>
+          <p>Covers the core first-year subjects of the 3-year LL.B. programme, including Con...</p>
+          <div class="course-foot"><span class="course-price">₹5,999.00</span><span class="course-link">Explore Course →</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Courses</a></div>
+  </div>
+</section>
+<!--===== COURSES SECTION ENDS =======-->
+
+<!--===== FREE NOTES SECTION STARTS =======-->
+<section class="section notes-section" id="notes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Free Notes</span>
+      <h2 class="section-title">Free <span class="accent">Study Notes</span></h2>
+      <p class="section-sub">Access valuable study materials and notes for your legal education</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="list-grid">
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📄</div><div class="list-body"><h4>Fundamental Rights under the Indian Constitution - Part III,...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📄</div><div class="list-body"><h4>Indian Penal Code: Key Doctrines &amp; Judicial Precedents - men...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📄</div><div class="list-body"><h4>Civil Procedure Code: Pleadings, Jurisdiction &amp; Suit Procedu...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📄</div><div class="list-body"><h4>Civil Procedure Code: Execution of Decrees &amp; Appeals - Order...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Notes</a></div>
+  </div>
+</section>
+<!--===== FREE NOTES SECTION ENDS =======-->
+
+<!--===== ACTS SECTION STARTS =======-->
+<section class="section acts-section" id="acts">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Bare Acts</span>
+      <h2 class="section-title">Bare <span class="accent">Acts</span></h2>
+      <p class="section-sub">Access comprehensive Bare Acts and legal documents</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="list-grid">
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📜</div><div class="list-body"><h4>The Indian Contract Act, 1872 - essentials of a valid contra...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📜</div><div class="list-body"><h4>The Transfer of Property Act, 1882 - sale, mortgage, lease a...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📜</div><div class="list-body"><h4>The Hindu Marriage Act, 1955 - conditions for a valid marria...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📜</div><div class="list-body"><h4>The Consumer Protection Act, 2019 - Consumer Commissions, e-...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📜</div><div class="list-body"><h4>The Industrial Disputes Act, 1947 - dispute resolution machi...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📜</div><div class="list-body"><h4>The Companies Act, 2013 - incorporation, corporate governanc...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📜</div><div class="list-body"><h4>The Bharatiya Sakshya Adhiniyam, 2023</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Acts</a></div>
+  </div>
+</section>
+<!--===== ACTS SECTION ENDS =======-->
+
+<!--===== RULES SECTION STARTS =======-->
+<section class="section rules-section" id="rules">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Legal Rules</span>
+      <h2 class="section-title">Legal <span class="accent">Rules</span></h2>
+      <p class="section-sub">Access comprehensive Rules and regulatory frameworks</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="list-grid">
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">⚖️</div><div class="list-body"><h4>Civil Procedure Rules: Order XXXIX - Temporary Injunctions,...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">⚖️</div><div class="list-body"><h4>Code of Criminal Procedure, 1973 - Rules on Bail &amp; Anticipat...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">⚖️</div><div class="list-body"><h4>Companies (Incorporation) Rules, 2014 - SPICe+ procedure and...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">⚖️</div><div class="list-body"><h4>The Indian Evidence Act, 1872 - Rules on Admissibility, burd...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">⚖️</div><div class="list-body"><h4>Landmark Judgment: Mohori Bibee v. Dharmodas Ghosh (1903) -...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Rules</a></div>
+  </div>
+</section>
+<!--===== RULES SECTION ENDS =======-->
+
+<!--===== LEGAL KNOWLEDGE CATEGORIES SECTION STARTS =======-->
+<section class="section kn-section" id="knowledge">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Legal Knowledge</span>
+      <h2 class="section-title">Legal <span class="accent">Knowledge</span></h2>
+      <p class="section-sub">Explore legal concepts, cases and compliance-oriented resources by category</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="kn-grid">
+      <a href="#" class="kn-card reveal" data-d="1"><h5>Constitutional Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="1"><h5>Cyber Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="2"><h5>Consumer Awareness</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="2"><h5>Cheque Bounce Cases</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="3"><h5>Civil Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="3"><h5>Criminal Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="4"><h5>Writs &amp; Applications</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="1"><h5>Company Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="1"><h5>Hindu Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="2"><h5>Muslim Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="2"><h5>Labour Law</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="3"><h5>Cyber Security</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="3"><h5>Cyber Crime</h5><span>Explore</span></a>
+      <a href="#" class="kn-card reveal" data-d="4"><h5>Legal Compliances</h5><span>Explore</span></a>
+    </div>
+  </div>
+</section>
+<!--===== LEGAL KNOWLEDGE CATEGORIES SECTION ENDS =======-->
+
+<!--===== KNOWLEDGE INQUIRY FORM SECTION STARTS =======-->
+<section class="section form-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Knowledge Inquiry</span>
+      <h2 class="section-title">Interested in Specific <span class="accent">Legal Knowledge?</span></h2>
+      <p class="section-sub">Submit your inquiry about any legal topic you'd like to explore deeper. Our legal experts will provide guidance and resources tailored to your learning needs.</p>
+      <div class="title-rule"></div>
+    </div>
+    <form class="form-card reveal" onsubmit="return false;">
+      <div class="form-row">
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Enter your full name"></div>
+        <div class="field"><label>Email Address</label><input type="email" placeholder="Enter your email"></div>
+        <div class="field"><label>Phone Number</label><input type="tel" placeholder="Enter your phone number"></div>
+        <div class="field"><label>Select Legal Knowledge Category</label><select><option value="">Select Legal Knowledge Category</option><option>Constitutional Law</option><option>Criminal Law</option><option>Family Law</option><option>Corporate Law</option><option>Labor Law</option><option>Tax Law</option><option>Environmental Law</option><option>Intellectual Property</option><option>Administrative Law</option><option>International Law</option></select></div>
+        <div class="field full"><label>Your Inquiry</label><textarea placeholder="Describe the legal topic you would like to explore"></textarea></div>
+        <div class="field full"><label>Upload Document (Optional)</label><input type="file"></div>
+      </div>
+      <div class="form-actions"><button type="submit" class="btn btn-gold">Send Inquiry</button></div>
+      <div class="form-note"><strong>Disclaimer:</strong> This inquiry facility is intended for preliminary communication and legal/educational information. Submission of an inquiry does not by itself create an advocate-client relationship. Formal legal advice, representation or engagement shall be subject to separate communication and acceptance.</div>
+    </form>
+  </div>
+</section>
+<!--===== KNOWLEDGE INQUIRY FORM SECTION ENDS =======-->
+
+<!--===== CENTRE & STATE GOVT EXAMS SECTION STARTS =======-->
+<section class="section exams-section" id="exams">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Exams</span>
+      <h2 class="section-title">Centre &amp; State Govt. <span class="accent">Examination</span></h2>
+      <p class="section-sub">Comprehensive preparation for competitive legal examinations</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="list-grid">
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📋</div><div class="list-body"><h4>State Judicial Services Examination: Becoming a Civil Judge...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📋</div><div class="list-body"><h4>All India Bar Examination (AIBE): What Every Law Graduate Sh...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📋</div><div class="list-body"><h4>SSC CGL: Legal-Sector Posts for Law Graduates - exam stages,...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📋</div><div class="list-body"><h4>RBI Grade B (Legal Officer): Exam Guide for Law Graduates -...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📋</div><div class="list-body"><h4>UPSC Civil Services Examination: A Guide for Law Graduates -...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Govt. Examinations</a></div>
+  </div>
+</section>
+<!--===== CENTRE & STATE GOVT EXAMS SECTION ENDS =======-->
+
+<!--===== COURSE ENQUIRY SECTION STARTS =======-->
+<section class="section enquiry-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Enquiry</span>
+      <h2 class="section-title">Interested in <span class="accent">Our Courses?</span></h2>
+      <p class="section-sub">Get in touch with our counselors to learn more about our comprehensive law courses and personalized learning programs. We're here to help you achieve your legal education goals.</p>
+      <div class="title-rule"></div>
+    </div>
+    <form class="form-card reveal" onsubmit="return false;">
+      <div class="form-row">
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Enter your full name"></div>
+        <div class="field"><label>Email Address</label><input type="email" placeholder="Enter your email"></div>
+        <div class="field"><label>Phone Number</label><input type="tel" placeholder="Enter your phone number"></div>
+        <div class="field"><label>Course Interested In</label><select><option value="">Course Interested In</option><option>LL.B. Entrance Examination</option><option>LL.B. – 3 Years</option><option>LL.B. – 5 Years</option><option>LL.M.</option><option>Judiciary Examination</option><option>CSEET</option><option>CA</option><option>CS</option><option>CMA</option><option>English Grammar</option><option>Spoken English</option></select></div>
+        <div class="field"><label>Preferred Mode</label><select><option value="">Preferred Mode</option><option>Online</option><option>Offline</option><option>Both</option></select></div>
+        <div class="field"><label>City</label><input type="text" placeholder="Enter your city"></div>
+        <div class="field full"><label>Message</label><textarea placeholder="Tell us what you would like to know"></textarea></div>
+      </div>
+      <div class="form-actions"><button type="submit" class="btn btn-gold">Send Enquiry</button></div>
+    </form>
+  </div>
+</section>
+<!--===== COURSE ENQUIRY SECTION ENDS =======-->
+
+<!--===== WHY LAWSTUDENT SECTION STARTS =======-->
+<section class="section why-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Us</span>
+      <h2 class="section-title">Why <span class="accent">Law Students?</span></h2>
+      <p class="section-sub">Discover what makes our platform the best choice for legal education</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal" data-d="1"><div class="why-icon">⚖️</div><h3>Expert Instructors</h3><p>Learn from experienced legal professionals with decades of practice and teaching experience</p></div>
+      <div class="why-card reveal" data-d="2"><div class="why-icon">📚</div><h3>Comprehensive Content</h3><p>Access complete study materials covering all major areas of law and legal practice</p></div>
+      <div class="why-card reveal" data-d="3"><div class="why-icon">⏱️</div><h3>Flexible Learning</h3><p>Study at your own pace with lifetime access to course materials and updates</p></div>
+      <div class="why-card reveal" data-d="1"><div class="why-icon">💰</div><h3>Affordable Pricing</h3><p>Quality legal education at competitive rates with various payment options available</p></div>
+      <div class="why-card reveal" data-d="2"><div class="why-icon">🎯</div><h3>Exam Preparation</h3><p>Dedicated exam coaching for CLAT, AIBE, UGC NET, and other legal entrance exams</p></div>
+      <div class="why-card reveal" data-d="3"><div class="why-icon">🛟</div><h3>24/7 Support</h3><p>Round-the-clock support from our dedicated counselors and academic team</p></div>
+    </div>
+  </div>
+</section>
+<!--===== WHY LAWSTUDENT SECTION ENDS =======-->
+
+<!--===== HOW IT WORKS SECTION STARTS =======-->
+<section class="section how-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Process</span>
+      <h2 class="section-title">How It <span class="accent">Works</span></h2>
+      <p class="section-sub">Your path from choosing a programme to achieving your legal career goals</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal" data-d="1"><div class="how-num">01</div><h3>Select</h3><p>Choose your programme — Course, Notes, Bare Acts or Exam preparation</p></div>
+      <div class="how-card reveal" data-d="2"><div class="how-num">02</div><h3>Study</h3><p>Go through structured notes, classes and resources at your own pace</p></div>
+      <div class="how-card reveal" data-d="3"><div class="how-num">03</div><h3>Practise</h3><p>Reinforce learning with MCQs, tests and practical resources</p></div>
+      <div class="how-card reveal" data-d="4"><div class="how-num">04</div><h3>Achieve</h3><p>Walk into your examination or career with confidence</p></div>
+    </div>
+  </div>
+</section>
+<!--===== HOW IT WORKS SECTION ENDS =======-->
+
+<!--===== LATEST LEGAL KNOWLEDGE SECTION STARTS =======-->
+<section class="section updates-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Updates</span>
+      <h2 class="section-title">Latest <span class="accent">Legal Knowledge</span></h2>
+      <p class="section-sub">Stay updated with the latest developments in law and legal practice</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="list-grid">
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📚</div><div class="list-body"><h4>The Right to Information Act, 2005: Empowering Citizens - ho...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📚</div><div class="list-body"><h4>Understanding Cyber Crimes and the Information Technology Ac...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📚</div><div class="list-body"><h4>Know Your Rights: Consumer Protection in the Digital Age - e...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="2"><div class="list-icon">📚</div><div class="list-body"><h4>Legal Aid in India: Article 39A and Access to Justice - elig...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+      <a href="#" class="list-card reveal" data-d="1"><div class="list-icon">📚</div><div class="list-body"><h4>Article 21: Right to Life and Personal Liberty - from A.K. G...</h4><div class="list-meta"><span class="pdf">1 PDF available</span><span class="go">View All →</span></div></div></a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View All Legal Knowledge</a></div>
+  </div>
+</section>
+<!--===== LATEST LEGAL KNOWLEDGE SECTION ENDS =======-->
+
+<!--===== GALLERY PREVIEW SECTION STARTS =======-->
+<section class="section gallery-section" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Gallery</span>
+      <h2 class="section-title">Our <span class="accent">Gallery</span></h2>
+      <p class="section-sub">Glimpses of our campus, events, and learning environment</p>
+      <div class="title-rule"></div>
+    </div>
+    <div class="gallery-grid">
+      <a href="#" class="album reveal" data-d="1">
+        <div class="album-imgs"><img src="images/gallery/us3O6BA22ohiDVAzCnO1EnqTgjI7Pu4ttquQ0o0C.png" alt="Moot Court Competition" loading="lazy" decoding="async"><img src="images/gallery/ejEVn51Qol76Avh6BFFKm7D9lU1YgH3N01z0SaVe.png" alt="Moot Court Competition" loading="lazy" decoding="async"></div>
+        <div class="album-body"><h4>Moot Court Competition</h4><span>2 Photos</span></div>
+      </a>
+      <a href="#" class="album reveal" data-d="2">
+        <div class="album-imgs"><img src="images/gallery/tsHYuSfPT7Tsm59P3lXTQcodmgYHWv5jPVDdfhKH.png" alt="Convocation Day" loading="lazy" decoding="async"><img src="images/gallery/XPWCP7Y9CZ2d6aZ1jc079Tw0t2LFQHQfpQuVF9eg.png" alt="Convocation Day" loading="lazy" decoding="async"></div>
+        <div class="album-body"><h4>Convocation Day</h4><span>2 Photos</span></div>
+      </a>
+      <a href="#" class="album reveal" data-d="3">
+        <div class="album-imgs single"><img src="images/gallery/y9OHs3YvWux37YbeUAPm0vWqeyz1Kx2BSFw0Yvlo.png" alt="Guest Lecture Series" loading="lazy" decoding="async"></div>
+        <div class="album-body"><h4>Guest Lecture Series</h4><span>1 Photos</span></div>
+      </a>
+      <a href="#" class="album reveal" data-d="4">
+        <div class="album-imgs"><img src="images/gallery/29YOMtAPwd2bF26ifRxRngwF5yTA6HttnLE0NTMW.png" alt="Campus Life" loading="lazy" decoding="async"><img src="images/gallery/nKXhkLFZ3dTmhorqS2N3fk31Y7JSg8FSWyIuHUeW.png" alt="Campus Life" loading="lazy" decoding="async"></div>
+        <div class="album-body"><h4>Campus Life</h4><span>2 Photos</span></div>
+      </a>
+    </div>
+    <div class="section-cta reveal"><a href="#" class="btn btn-gold">View Full Gallery</a></div>
+  </div>
+</section>
+<!--===== GALLERY PREVIEW SECTION ENDS =======-->
+
+<!--===== CONTACT US SECTION STARTS =======-->
+<section class="section contact-section" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="section-title">Get in Touch with <span class="accent">Law Student</span></h2>
+      <div class="title-rule"></div>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-intro reveal">
+        <p>Have questions about our courses, Bare Acts, or study materials? Our team is ready to help you every step of the way in your legal education journey.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="contact-ico">📍</div><div><h5>Address</h5><p>224 Legal District, Delhi High Court Marg, New Delhi 110001</p></div></div>
+          <div class="contact-item"><div class="contact-ico">📞</div><div><h5>Phone</h5><p>+916624536320</p></div></div>
+          <div class="contact-item"><div class="contact-ico">💬</div><div><h5>WhatsApp</h5><p>+916624536320</p></div></div>
+          <div class="contact-item"><div class="contact-ico">✉️</div><div><h5>Email</h5><p>lawstudents.edu@gmail.com</p></div></div>
+        </div>
+      </div>
+      <form class="form-card reveal" data-d="1" onsubmit="return false;">
+        <div class="form-row">
+          <div class="field"><label>Full Name</label><input type="text" placeholder="Enter your full name"></div>
+          <div class="field"><label>Email Address</label><input type="email" placeholder="Enter your email"></div>
+          <div class="field"><label>Phone Number</label><input type="tel" placeholder="Enter your phone number"></div>
+          <div class="field"><label>Subject</label><input type="text" placeholder="Subject of your message"></div>
+          <div class="field full"><label>Message</label><textarea placeholder="Write your message here"></textarea></div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-gold">Send Message</button>
+          <a href="#" class="btn btn-ghost" style="color:#a8842a;margin-left:8px">WhatsApp Us</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!--===== CONTACT US SECTION ENDS =======-->
+
+<!--===== FOOTER STARTS =======-->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-logo">
+        <img src="images/logo-full.png" alt="Law Students" loading="lazy" decoding="async">
+        <p class="footer-tag">Learn Law.<br>Understand Law.<br>Build Your Future.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#acts">Acts &amp; Rules</a></li>
+          <li><a href="#knowledge">Legal Knowledge</a></li>
+          <li><a href="#courses">All Courses</a></li>
+          <li><a href="#notes">Study Materials</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#">LL.B. Entrance Prep</a></li>
+          <li><a href="#">LL.B. (3-Year)</a></li>
+          <li><a href="#">LL.B. (5-Year)</a></li>
+          <li><a href="#">LL.M. Specialization</a></li>
+          <li><a href="#">Judiciary Exams</a></li>
+          <li><a href="#">CSEET Preparation</a></li>
+          <li><a href="#">CA Studies</a></li>
+          <li><a href="#">CS Studies</a></li>
+          <li><a href="#">CMA Studies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><div class="footer-contact-ico">✉️</div><div><h6>Email</h6><p>lawstudents.edu@gmail.com</p></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-ico">📍</div><div><h6>Address</h6><p>224 Legal District, Delhi High Court Marg, New Delhi 110001</p></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-ico">📞</div><div><h6>Phone</h6><p>+916624536320</p></div></div>
+        <div class="footer-contact-item"><div class="footer-contact-ico">💬</div><div><h6>WhatsApp</h6><p>+916624536320</p></div></div>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#acts">Bare Acts</a></li>
+          <li><a href="#rules">Rules &amp; Regulations</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="#exams">Competitive Exams</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social Media</h4>
+        <div class="social-row">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Twitter">𝕏</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="LinkedIn">in</a>
+          <a href="#" title="YouTube">▶</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a><span class="sep">|</span>
+        <a href="#">Terms &amp; Conditions</a><span class="sep">|</span>
+        <a href="#">Disclaimer</a><span class="sep">|</span>
+        <a href="#">Refund Policy</a><span class="sep">|</span>
+        <a href="#">Sitemap</a>
+      </div>
+      <div class="copyright">© 2026 Law Student. All Rights Reserved.</div>
+    </div>
+  </div>
+</footer>
+<!--===== FOOTER ENDS =======-->
+
+<a href="#" class="wa-float" title="WhatsApp Us" aria-label="WhatsApp">✆</a>
+
+<script>
+var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Preloader: faster dismissal
+window.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){ document.getElementById('preloader').classList.add('loaded'); }, 1200);
+});
+setTimeout(function(){ document.getElementById('preloader').classList.add('loaded'); }, 4000);
+
+// Topbar collapse on mobile
+var topbar = document.getElementById('topbar');
+var header = document.getElementById('siteHeader');
+window.addEventListener('scroll', function(){
+  if(window.innerWidth <= 768){
+    if(window.scrollY > 50) topbar.classList.add('collapsed');
+    else topbar.classList.remove('collapsed');
+  }
+});
+
+// Scroll reveal with improved timing
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      setTimeout(function(){
+        e.target.classList.add('in');
+      }, 50);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold:0.15, rootMargin:'0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+// Scroll progress ring + sticky header
+var path = document.getElementById('progressPath');
+var len = path.getTotalLength();
+path.style.strokeDasharray = len + ' ' + len;
+path.style.strokeDashoffset = len;
+var wrapEl = document.getElementById('progressWrap');
+
+window.addEventListener('scroll', function(){
+  var top = window.scrollY;
+  var height = document.documentElement.scrollHeight - window.innerHeight;
+  path.style.strokeDashoffset = len - (top * len / height);
+  wrapEl.classList.toggle('active', top > 300);
+  header.classList.toggle('stuck', top > 50);
+});
+wrapEl.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+// Mobile menu
+var burger = document.getElementById('burger');
+var mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', function(){
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// ===== ENHANCED ANIMATIONS =====
+
+// Navbar magnetic hover effect
+if(!prefersReducedMotion){
+  document.querySelectorAll('.nav-menu > li > a').forEach(function(link){
+    link.addEventListener('mousemove', function(e){
+      var rect = link.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width / 2) * 0.15;
+      var dy = (e.clientY - rect.top - rect.height / 2) * 0.15;
+      link.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+    });
+    link.addEventListener('mouseleave', function(){
+      link.style.transform = 'translate(0, 0)';
+    });
+  });
+}
+
+// Course card 3D tilt effect
+if(!prefersReducedMotion){
+  document.querySelectorAll('.course-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = (e.clientY - rect.top) / rect.height;
+      var rotX = (y - 0.5) * 8;
+      var rotY = (x - 0.5) * 8;
+      card.style.transform = 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transform = 'rotateX(0) rotateY(0)';
+    });
+  });
+}
+
+// Magnetic cursor effect on buttons
+if(!prefersReducedMotion){
+  document.querySelectorAll('.btn-gold').forEach(function(btn){
+    btn.addEventListener('mousemove', function(e){
+      var rect = btn.getBoundingClientRect();
+      var dx = (e.clientX - rect.left - rect.width / 2) * 0.2;
+      var dy = (e.clientY - rect.top - rect.height / 2) * 0.2;
+      btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+    });
+    btn.addEventListener('mouseleave', function(){
+      btn.style.transform = 'translate(0, 0)';
+    });
+  });
+}
+
+// Price counter animation on course cards
+function animateCounter(el, target, duration){
+  var start = 0;
+  var increment = target / (duration / 16);
+  var current = start;
+  var timer = setInterval(function(){
+    current += increment;
+    if(current >= target){
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = '₹' + Math.floor(current).toLocaleString('en-IN');
+  }, 16);
+}
+
+var priceObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting && !e.target.dataset.counted){
+      e.target.dataset.counted = 'true';
+      var price = parseFloat(e.target.textContent.replace(/[₹,]/g, ''));
+      if(!prefersReducedMotion) animateCounter(e.target, price, 1200);
+    }
+  });
+}, { threshold:0.5 });
+
+document.querySelectorAll('.course-price').forEach(function(el){ priceObserver.observe(el); });
+
+// Custom cursor dot with lagging ring
+if(!prefersReducedMotion && window.innerWidth > 768){
+  var cursor = document.createElement('div');
+  cursor.style.cssText = 'position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-6px,-6px);box-shadow:0 0 8px rgba(212,175,55,.6);display:none';
+  document.body.appendChild(cursor);
+
+  var cursorRing = document.createElement('div');
+  cursorRing.style.cssText = 'position:fixed;width:32px;height:32px;border:2px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-16px,-16px);opacity:.4;display:none';
+  document.body.appendChild(cursorRing);
+
+  var x = 0, y = 0, ringX = 0, ringY = 0;
+  document.addEventListener('mousemove', function(e){
+    x = e.clientX;
+    y = e.clientY;
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    cursor.style.display = 'block';
+    cursorRing.style.display = 'block';
+  });
+
+  setInterval(function(){
+    ringX += (x - ringX) * 0.25;
+    ringY += (y - ringY) * 0.25;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+  }, 16);
+}
+
+// Number count-up animation for How It Works
+function countUpNumbers(){
+  document.querySelectorAll('.how-num').forEach(function(el){
+    var text = el.textContent;
+    var num = parseInt(text);
+    if(isNaN(num)) return;
+
+    el.dataset.counting = 'true';
+    var current = 0;
+    var increment = num / 60;
+    var timer = setInterval(function(){
+      current += increment;
+      if(current >= num){
+        current = num;
+        clearInterval(timer);
+      }
+      el.textContent = ('0' + Math.floor(current)).slice(-2);
+    }, 16);
+  });
+}
+
+var countObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting && !e.target.dataset.countStarted){
+      e.target.dataset.countStarted = 'true';
+      if(!prefersReducedMotion) countUpNumbers();
+    }
+  });
+}, { threshold:0.3 });
+
+document.querySelectorAll('.how-grid').forEach(function(el){ countObserver.observe(el); });
+
+// Parallax + continuous animation for knowledge cards
+if(!prefersReducedMotion && window.innerWidth > 768){
+  var lastScrollY = 0;
+  window.addEventListener('scroll', function(){
+    lastScrollY = window.scrollY;
+    document.querySelectorAll('.kn-card.in').forEach(function(card, idx){
+      var baseOffset = (idx % 7) * 1.5;  // Stagger by column
+      var scrollOffset = (lastScrollY * 0.03 * baseOffset / 10);  // Subtle parallax
+      var baseTransform = 'translateY(' + (scrollOffset + baseOffset) + 'px)';
+
+      // Don't override if hovering (detected by scale)
+      var currentTransform = card.style.transform;
+      if(!currentTransform || !currentTransform.includes('scale')) {
+        card.style.transform = baseTransform;
+      }
+    });
+  }, { passive: true });
+}
+
+// Stats counter animation - trigger when scrolled into view
+function animateStatsCounter(el, start, end, duration){
+  var startTime = null;
+  var animate = function(currentTime){
+    if(!startTime) startTime = currentTime;
+    var elapsed = currentTime - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    var value = Math.floor(start + (end - start) * progress);
+    el.textContent = value;
+    if(progress < 1) requestAnimationFrame(animate);
+  };
+  if(!prefersReducedMotion) requestAnimationFrame(animate);
+  else el.textContent = end;
+}
+
+var statsObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting && !e.target.dataset.statsCounted){
+      e.target.dataset.statsCounted = 'true';
+      document.querySelectorAll('[data-stat-end]').forEach(function(stat){
+        var end = parseInt(stat.getAttribute('data-stat-end')) || 0;
+        animateStatsCounter(stat, 0, end, 1500);
+      });
+    }
+  });
+}, { threshold:0.3 });
+
+var statsEl = document.querySelector('.stats-strip');
+if(statsEl) statsObserver.observe(statsEl);
+
+// Scroll direction detection for staggered animations
+var lastScrollPos = 0;
+var scrollDirection = 'down';
+window.addEventListener('scroll', function(){
+  var currentScrollPos = window.scrollY;
+  scrollDirection = currentScrollPos > lastScrollPos ? 'down' : 'up';
+  lastScrollPos = currentScrollPos;
+}, { passive:true });
+
+// Apply scroll direction to reveal elements
+if(!prefersReducedMotion){
+  var directionObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, idx){
+      if(e.isIntersecting){
+        var delay = idx * 40; // 40ms stagger
+        setTimeout(function(){
+          e.target.classList.add('in');
+        }, delay);
+        directionObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    directionObserver.observe(el);
+  });
+}
+
+// Legal Knowledge magnetic attraction enhancement (works with floating animation)
+if(!prefersReducedMotion){
+  document.querySelectorAll('.kn-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      if(!card.classList.contains('in')) return;
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var strength = 0.15;
+      var moveX = (x - rect.width / 2) * strength / 50;
+      var moveY = (y - rect.height / 2) * strength / 50;
+      card.style.transform = 'translate(' + moveX + 'px, ' + (moveY - 12) + 'px) scale(1.05)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.animation = 'floatCard 3s ease-in-out infinite';
+      card.style.transform = '';
+    });
+  });
+}
+
+// Why Us icon hover animations
+if(!prefersReducedMotion){
+  document.querySelectorAll('.why-icon').forEach(function(icon){
+    icon.addEventListener('mouseenter', function(){
+      icon.style.animation = 'iconPulse .6s ease';
+    });
+  });
+}
+
+// How It Works - enhanced count-up for numbers
+function countUpNumber(el, target, duration){
+  var current = 0;
+  var increment = target / (duration / 16);
+  var timer = setInterval(function(){
+    current += increment;
+    if(current >= target){
+      current = target;
+      clearInterval(timer);
+    }
+    var formattedNum = ('0' + Math.floor(current)).slice(-2);
+    el.textContent = formattedNum;
+  }, 16);
+}
+
+var howGridObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting && !e.target.dataset.howCounted){
+      e.target.dataset.howCounted = 'true';
+      document.querySelectorAll('.how-num').forEach(function(numEl){
+        var num = parseInt(numEl.textContent);
+        if(!isNaN(num) && !prefersReducedMotion){
+          countUpNumber(numEl, num, 1200);
+        }
+      });
+    }
+  });
+}, { threshold:0.3 });
+
+var howGrid = document.querySelector('.how-grid');
+if(howGrid) howGridObserver.observe(howGrid);
+
+// Navbar logo shrink on scroll
+var navLogo = document.querySelector('.nav-logo img');
+if(navLogo){
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 80){
+      navLogo.style.height = '46px';
+    } else {
+      navLogo.style.height = '60px';
+    }
+  });
+}
+
+// Rules section - card expand on hover to show summary
+document.querySelectorAll('.rules-section .list-card').forEach(function(card){
+  var originalHeight = card.offsetHeight;
+  card.addEventListener('mouseenter', function(){
+    if(!prefersReducedMotion){
+      card.style.height = (originalHeight + 20) + 'px';
+    }
+  });
+  card.addEventListener('mouseleave', function(){
+    card.style.height = originalHeight + 'px';
+  });
+});
+
+// Contact icons pulse in sequence
+if(!prefersReducedMotion){
+  var contactIcons = document.querySelectorAll('.contact-item .contact-ico');
+  var pulseSequence = setInterval(function(){
+    contactIcons.forEach(function(icon, idx){
+      setTimeout(function(){
+        icon.style.animation = 'pulseSequence 2.4s ease-out';
+      }, idx * 300);
+    });
+  }, 2400 + (contactIcons.length * 300));
+}
+
+// Respect prefers-reduced-motion
+if(prefersReducedMotion){
+  document.documentElement.style.scrollBehavior = 'auto';
+}
+</script>
+</body>
+</html>
