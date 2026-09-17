@@ -1506,6 +1506,75 @@ body.enroll-bar-on .counsel-pop{bottom:156px}
   .social-row{justify-content:flex-start}
   .footer-contact-item{padding:7px 9px}
 }
+
+/* ================================================================
+   CTA MARK LAYER — appended only, no existing rule modified.
+   Mirrors the courses traveling-ring + pointer-hint interaction.
+   One marker travels each section: every card's "View All" in turn,
+   then the section button. Only the marker animates — no card moves.
+   ================================================================ */
+.notes-section .section-cta,
+.acts-section .section-cta,
+.rules-section .section-cta,
+.exams-section .section-cta,
+.updates-section .section-cta{position:relative}
+
+.notes-section .section-cta .btn,
+.acts-section .section-cta .btn,
+.rules-section .section-cta .btn,
+.exams-section .section-cta .btn,
+.updates-section .section-cta .btn{position:relative}
+
+/* outline, not a pseudo-element: .btn-gold sets overflow:hidden, which
+   would clip anything drawn outside the button box */
+.section-cta .btn.cta-mark{
+  outline:2px solid var(--gold);outline-offset:6px;
+  animation:ctaRingPulse 1.6s ease-in-out infinite;
+}
+@keyframes ctaRingPulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(212,175,55,.10),0 0 20px rgba(212,175,55,.35)}
+  50%{box-shadow:0 0 0 10px rgba(212,175,55,.04),0 0 34px rgba(212,175,55,.6)}
+}
+
+.cta-ptr{
+  position:absolute;left:50%;margin-left:-7px;top:-20px;z-index:6;
+  width:0;height:0;pointer-events:none;opacity:0;
+  border-left:7px solid transparent;border-right:7px solid transparent;
+  border-top:11px solid var(--gold);
+  filter:drop-shadow(0 2px 5px rgba(212,175,55,.55));
+}
+.section-cta.cta-mark-on .cta-ptr{animation:ctaPtrBounce .62s cubic-bezier(.22,1,.36,1) 3}
+@keyframes ctaPtrBounce{
+  0%{opacity:0;transform:translateY(-11px)}
+  40%{opacity:1;transform:translateY(3px)}
+  70%{opacity:1;transform:translateY(-5px)}
+  100%{opacity:0;transform:translateY(0)}
+}
+
+/* per-card "View All →" marker — same ring, tighter halo for the
+   smaller target. .go is inline, so the outline hugs the text run. */
+.list-card .list-meta .go.cta-mark{
+  outline:2px solid var(--gold);outline-offset:4px;
+  border-radius:6px;color:var(--gold-dark);letter-spacing:.4px;
+  animation:goRingPulse 1.6s ease-in-out infinite;
+}
+@keyframes goRingPulse{
+  0%,100%{box-shadow:0 0 0 2px rgba(212,175,55,.10),0 0 10px rgba(212,175,55,.35)}
+  50%{box-shadow:0 0 0 5px rgba(212,175,55,.05),0 0 18px rgba(212,175,55,.6)}
+}
+
+@media(hover:hover){
+  .section-cta .btn.cta-mark:hover{animation-play-state:paused}
+  .list-card:hover .list-meta .go.cta-mark{animation-play-state:paused}
+}
+@media(prefers-reduced-motion:reduce){
+  .section-cta .btn.cta-mark{animation:none}
+  .list-card .list-meta .go.cta-mark{animation:none}
+  .cta-ptr{display:none}
+}
+@media(max-width:600px){
+  .cta-ptr{display:none}
+}
 </style>
 </head>
 <body>
@@ -2998,6 +3067,76 @@ if(prefersReducedMotion){
     if(!key || !P[key]) return;              // unknown network keeps its glyph
     a.setAttribute('aria-label', key);
     a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + P[key] + '</svg>';
+  });
+})();
+
+/* ================================================================
+   CTA MARK LAYER — appended only, no existing handler modified.
+   Rings the section "View All" button while its section is on
+   screen, the way the courses grid rings a card. Cards untouched.
+   ================================================================ */
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduced) return;
+
+  var SECTIONS = ['.notes-section','.acts-section','.rules-section','.exams-section','.updates-section'];
+
+  SECTIONS.forEach(function(sel){
+    var section = document.querySelector(sel);
+    if(!section) return;
+
+    var wrap = section.querySelector('.section-cta');
+    var btn  = wrap && wrap.querySelector('.btn');
+
+    /* stops: every card's "View All →", then the section button last */
+    var stops = [].slice.call(section.querySelectorAll('.list-card .list-meta .go'));
+    if(btn) stops.push(btn);
+    if(!stops.length) return;
+
+    var ptr = null;
+    if(wrap){
+      ptr = document.createElement('i');
+      ptr.className = 'cta-ptr';
+      ptr.setAttribute('aria-hidden','true');
+      wrap.appendChild(ptr);
+    }
+
+    var idx = -1, inView = false, paused = false, timer = null;
+
+    function clear(){
+      stops.forEach(function(el){ el.classList.remove('cta-mark'); });
+      if(wrap) wrap.classList.remove('cta-mark-on');
+    }
+    function step(){
+      if(!inView || paused) return;
+      clear();
+      idx = (idx + 1) % stops.length;
+      var el = stops[idx];
+      el.classList.add('cta-mark');
+      /* the pointer only rides the section button, not the small links */
+      if(ptr && el === btn){
+        ptr.style.animation = 'none'; void ptr.offsetWidth; ptr.style.animation = '';
+        wrap.classList.add('cta-mark-on');
+      }
+    }
+
+    /* pause only over an actual click target, not the whole section —
+       otherwise reading the list stops the marker entirely */
+    var hoverTargets = [].slice.call(section.querySelectorAll('.list-card'));
+    if(btn) hoverTargets.push(btn);
+    hoverTargets.forEach(function(t){
+      t.addEventListener('mouseenter', function(){ paused = true; clear(); });
+      t.addEventListener('mouseleave', function(){ paused = false; });
+    });
+
+    new IntersectionObserver(function(entries){
+      inView = entries[0].isIntersecting;
+      if(inView){
+        if(!timer){ step(); timer = setInterval(step, 2400); }
+      } else if(timer){
+        clearInterval(timer); timer = null; clear();
+      }
+    }, { threshold:0.15 }).observe(section);
   });
 })();
 </script>
