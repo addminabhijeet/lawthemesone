@@ -1122,6 +1122,121 @@ body.enroll-bar-on .counsel-pop{bottom:156px}
   .progress-wrap.cta-mode{padding:0 16px}
   .progress-wrap.cta-mode::after{font-size:11.5px}
 }
+
+/* ================================================================
+   MOTION LAYER — appended only, no existing rule modified.
+   Transforms live on an injected .cc-stage wrapper so they never
+   collide with the existing 3D-tilt handler on .course-card.
+   ================================================================ */
+.cc-stage{
+  position:relative;display:flex;
+  transition:opacity .35s ease, filter .35s ease;
+  will-change:transform;
+}
+.cc-stage > .course-card{flex:1;min-width:0;cursor:pointer}
+.course-grid{perspective:1400px;grid-auto-flow:row dense}
+
+/* --- 2 + 3. Featured promotion (its reflow is the FLIP reorder) --- */
+.cc-stage.featured{grid-column:span 2}
+.hot-badge{
+  position:absolute;top:13px;right:13px;z-index:5;
+  background:var(--grad-gold);color:var(--black);
+  font-size:10.5px;font-weight:800;letter-spacing:.3px;
+  padding:5px 12px;border-radius:20px;white-space:nowrap;
+  box-shadow:0 6px 18px rgba(212,175,55,.45);
+  opacity:0;transform:translateY(-8px) scale(.9);
+  transition:opacity .45s ease, transform .45s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+}
+.cc-stage.featured .hot-badge{opacity:1;transform:translateY(0) scale(1)}
+
+/* --- 8. Traveling highlight ring --- */
+.cc-stage.ring-focus::after{
+  content:'';position:absolute;inset:-6px;border-radius:16px;
+  border:2px solid var(--gold);pointer-events:none;z-index:4;
+  animation:ringPulse 1.6s ease-in-out infinite;
+}
+@keyframes ringPulse{
+  0%,100%{box-shadow:0 0 0 4px rgba(212,175,55,.10),0 0 20px rgba(212,175,55,.35)}
+  50%{box-shadow:0 0 0 10px rgba(212,175,55,.04),0 0 34px rgba(212,175,55,.6)}
+}
+.cc-stage.ring-focus .course-link{color:var(--gold-dark);letter-spacing:.4px}
+
+/* --- 9. Animated pointer hint --- */
+.hint-ptr{
+  position:absolute;right:16px;bottom:54px;z-index:6;
+  width:0;height:0;pointer-events:none;opacity:0;
+  border-left:7px solid transparent;border-right:7px solid transparent;
+  border-top:11px solid var(--gold);
+  filter:drop-shadow(0 2px 5px rgba(212,175,55,.55));
+}
+.cc-stage.ring-focus .hint-ptr{animation:ptrBounce .62s cubic-bezier(.22,1,.36,1) 3}
+@keyframes ptrBounce{
+  0%{opacity:0;transform:translateY(-11px)}
+  40%{opacity:1;transform:translateY(3px)}
+  70%{opacity:1;transform:translateY(-5px)}
+  100%{opacity:0;transform:translateY(0)}
+}
+
+/* --- 10. Spotlight dimming --- */
+.course-grid.spotlight .cc-stage{opacity:.4;filter:saturate(.5)}
+.course-grid.spotlight .cc-stage.spot{opacity:1;filter:none;z-index:3}
+
+/* --- 11. CTA sheen sweep --- */
+.btn-gold{position:relative;overflow:hidden}
+.btn-gold::after{
+  content:'';position:absolute;top:-10%;left:-70%;width:45%;height:120%;
+  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.6) 50%,transparent 100%);
+  transform:skewX(-20deg);pointer-events:none;
+  animation:btnSheen 4.2s ease-in-out infinite;
+}
+@keyframes btnSheen{0%,70%{left:-70%}100%{left:140%}}
+
+/* --- 12. Link arrow pull --- */
+.cl-arrow{display:inline-block;animation:arrowPull 1.5s ease-in-out infinite}
+@keyframes arrowPull{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.course-card:hover .cl-arrow{animation:none}
+
+/* --- 13. Click ripple --- */
+.ripple-dot{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:7;
+  width:18px;height:18px;margin:-9px 0 0 -9px;
+  background:radial-gradient(circle,rgba(212,175,55,.6) 0%,rgba(212,175,55,0) 70%);
+  animation:rippleGrow .62s ease-out forwards;
+}
+@keyframes rippleGrow{from{transform:scale(0);opacity:.9}to{transform:scale(18);opacity:0}}
+
+/* --- 6. Infinite course ticker --- */
+.course-ticker{
+  overflow:hidden;margin:30px 0 4px;padding:12px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(212,175,55,.06),rgba(240,217,125,.02));
+  position:relative;z-index:1;
+}
+.course-ticker .acts-ticker{
+  display:flex;align-items:center;width:max-content;
+  animation:tickerSlide 40s linear infinite;
+}
+.course-ticker:hover .acts-ticker{animation-play-state:paused}
+@keyframes tickerSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick-item{
+  display:inline-flex;align-items:center;gap:10px;padding:0 22px;
+  white-space:nowrap;font-size:12.5px;color:var(--ink);
+  border-right:1px dashed var(--line);cursor:pointer;
+}
+.tick-item b{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:700}
+.tick-item i{font-style:normal;font-weight:800;color:var(--gold-dark)}
+.tick-item u{
+  text-decoration:none;font-size:10.5px;font-weight:800;color:var(--black);
+  background:var(--grad-gold);padding:3px 11px;border-radius:12px;
+}
+
+@media(max-width:768px){
+  .cc-stage.featured{grid-column:auto}
+  .course-grid{perspective:none}
+  .hot-badge{font-size:9.5px;padding:4px 9px;top:10px;right:10px}
+  .hint-ptr{display:none}
+}
 </style>
 </head>
 <body>
@@ -2310,6 +2425,289 @@ if(prefersReducedMotion){
       });
     });
   }
+})();
+
+/* ================================================================
+   MOTION LAYER — appended only.
+   Five systems want to transform the same 9 cards, and the existing
+   3D-tilt handler already owns .course-card's inline transform, so
+   every card gets an injected .cc-stage wrapper and a single
+   compositor merges the channels into one transform string.
+   ================================================================ */
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var grid = document.querySelector('.course-grid');
+  if(!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll(':scope > .course-card'));
+  if(!cards.length) return;
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  /* ---------- Read card data before we touch the DOM (for the ticker) ---------- */
+  var tickData = cards.map(function(c){
+    var t = c.querySelector('h3'), p = c.querySelector('.course-price');
+    return { t: t ? t.textContent.trim() : '', p: p ? p.textContent.trim() : '' };
+  });
+
+  /* ---------- Wrap every card in a stage ---------- */
+  var stages = cards.map(function(card){
+    var st = document.createElement('div');
+    st.className = 'cc-stage';
+    card.parentNode.insertBefore(st, card);
+    st.appendChild(card);
+
+    var badge = document.createElement('span');
+    badge.className = 'hot-badge';
+    badge.textContent = '🔥 Most Enrolled';
+    st.appendChild(badge);
+
+    var ptr = document.createElement('i');
+    ptr.className = 'hint-ptr';
+    ptr.setAttribute('aria-hidden','true');
+    st.appendChild(ptr);
+    return st;
+  });
+
+  /* ---------- Transform compositor ---------- */
+  var ch = stages.map(function(){ return { deal:'', flip:'', flow:'', skew:'', repel:'' }; });
+  function paint(i){
+    var c = ch[i];
+    stages[i].style.transform = [c.deal, c.flip, c.flow, c.skew, c.repel]
+      .filter(Boolean).join(' ');
+  }
+
+  var inView = false, paused = false, flipping = false;
+  var desktop = window.innerWidth > 768;
+  window.addEventListener('resize', function(){ desktop = window.innerWidth > 768; }, { passive:true });
+
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      inView = e.isIntersecting;
+      if(inView) startLoop(); else stopLoop();
+    });
+  }, { threshold:0.05 }).observe(grid);
+
+  /* ---------- 12. Split the trailing arrow out of "Explore Course →" ---------- */
+  cards.forEach(function(c){
+    var l = c.querySelector('.course-link');
+    if(l && l.textContent.indexOf('→') > -1){
+      l.innerHTML = esc(l.textContent.replace(/\s*→\s*$/,'')) + ' <span class="cl-arrow">→</span>';
+    }
+  });
+
+  /* ---------- Make the cards actually clickable ----------
+     The markup ships them as <article> with a <span> "link", so nothing
+     was reachable. Route a card click to the course enquiry form. */
+  function goEnquire(){
+    var t = document.querySelector('.enquiry-section');
+    if(t) t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block:'start' });
+  }
+
+  /* ---------- 13. Click ripple ---------- */
+  function ripple(e, host){
+    if(reduced) return;
+    var r = host.getBoundingClientRect();
+    var d = document.createElement('span');
+    d.className = 'ripple-dot';
+    d.style.left = (e.clientX - r.left) + 'px';
+    d.style.top  = (e.clientY - r.top)  + 'px';
+    host.appendChild(d);
+    setTimeout(function(){ if(d.parentNode) d.parentNode.removeChild(d); }, 660);
+  }
+  cards.forEach(function(c){
+    c.addEventListener('click', function(e){ ripple(e, c); setTimeout(goEnquire, 160); });
+  });
+  document.querySelectorAll('.btn-gold').forEach(function(b){
+    b.addEventListener('click', function(e){ ripple(e, b); });
+  });
+
+  /* ---------- 1. Deal-the-deck entrance ---------- */
+  var dealt = false;
+  function deal(){
+    if(dealt) return;
+    dealt = true;
+    if(reduced){ setTimeout(startCycle, 400); return; }
+
+    var g = grid.getBoundingClientRect();
+    var gcx = g.left + g.width / 2, gcy = g.top + g.height / 2;
+    var rects = stages.map(function(s){ return s.getBoundingClientRect(); });
+
+    stages.forEach(function(s, i){
+      var r = rects[i];
+      var dx = gcx - (r.left + r.width / 2);
+      var dy = gcy - (r.top + r.height / 2);
+      s.style.transition = 'none';
+      ch[i].deal = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) rotate(' +
+                   ((i % 2 ? 1 : -1) * (5 + i)) + 'deg) scale(.84)';
+      paint(i);
+    });
+    void grid.offsetWidth; // force the deck state to commit
+
+    stages.forEach(function(s, i){
+      setTimeout(function(){
+        s.style.transition = 'transform .85s cubic-bezier(.22,1,.36,1)';
+        ch[i].deal = '';
+        paint(i);
+        setTimeout(function(){ s.style.transition = ''; }, 900);
+      }, i * 85);
+    });
+    setTimeout(startCycle, stages.length * 85 + 1800);
+  }
+  var dealIO = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ deal(); dealIO.disconnect(); } });
+  }, { threshold:0.12 });
+  dealIO.observe(grid);
+
+  /* ---------- 2 + 3. Featured promotion, FLIP-animated ----------
+     Giving one stage grid-column:span 2 reflows the whole grid, so the
+     FLIP that animates that reflow IS the auto-shuffle. One system,
+     both behaviours, and it pauses the moment a cursor enters. */
+  var featIdx = -1, featTimer = null;
+  function promote(next){
+    var firsts = stages.map(function(s){ return s.getBoundingClientRect(); });
+    stages.forEach(function(s){ s.classList.remove('featured'); });
+    if(next >= 0) stages[next].classList.add('featured');
+    var lasts = stages.map(function(s){ return s.getBoundingClientRect(); });
+
+    flipping = true;
+    stages.forEach(function(s, i){
+      var dx = firsts[i].left - lasts[i].left;
+      var dy = firsts[i].top  - lasts[i].top;
+      s.style.transition = 'none';
+      ch[i].flip = (dx || dy)
+        ? 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)'
+        : '';
+      paint(i);
+    });
+    void grid.offsetWidth;
+
+    stages.forEach(function(s, i){
+      s.style.transition = 'transform .7s cubic-bezier(.22,1,.36,1), opacity .35s ease, filter .35s ease';
+      ch[i].flip = '';
+      paint(i);
+    });
+    setTimeout(function(){
+      flipping = false;
+      stages.forEach(function(s){ s.style.transition = ''; });
+    }, 720);
+    featIdx = next;
+  }
+  function startCycle(){
+    if(reduced) return;
+    stopCycle();
+    featTimer = setInterval(function(){
+      if(!inView || paused || flipping) return;
+      promote((featIdx + 1) % stages.length);
+    }, 4600);
+  }
+  function stopCycle(){ if(featTimer){ clearInterval(featTimer); featTimer = null; } }
+
+  /* ---------- 8 + 9. Traveling ring and pointer hint ---------- */
+  var ringIdx = -1;
+  function clearRing(){ stages.forEach(function(s){ s.classList.remove('ring-focus'); }); }
+  if(!reduced){
+    setInterval(function(){
+      if(!inView || paused) return;
+      clearRing();
+      ringIdx = (ringIdx + 1) % stages.length;
+      var s = stages[ringIdx];
+      var p = s.querySelector('.hint-ptr');
+      if(p){ p.style.animation = 'none'; void p.offsetWidth; p.style.animation = ''; }
+      s.classList.add('ring-focus');
+    }, 3000);
+  }
+
+  /* ---------- 10. Spotlight dimming (and it pauses everything else) ---------- */
+  var hoverCapable = window.matchMedia('(hover:hover)').matches;
+  if(!reduced && hoverCapable){
+    stages.forEach(function(s){
+      s.addEventListener('mouseenter', function(){
+        grid.classList.add('spotlight');
+        stages.forEach(function(o){ o.classList.remove('spot'); });
+        s.classList.add('spot');
+      });
+    });
+  }
+  grid.addEventListener('mouseenter', function(){ paused = true; clearRing(); });
+  grid.addEventListener('mouseleave', function(){
+    paused = false;
+    grid.classList.remove('spotlight');
+    stages.forEach(function(o){ o.classList.remove('spot'); });
+  });
+  grid.addEventListener('touchstart', function(){ paused = true; }, { passive:true });
+
+  /* ---------- 4 + 5 + 7. Continuous channels: skew, coverflow, repel ---------- */
+  var vel = 0, lastSY = window.scrollY, mx = null, my = null;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    vel = Math.max(-70, Math.min(70, y - lastSY));
+    lastSY = y;
+  }, { passive:true });
+  grid.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; });
+  grid.addEventListener('mouseleave', function(){ mx = null; my = null; });
+
+  var rafId = null;
+  function startLoop(){
+    if(rafId === null && !reduced) rafId = requestAnimationFrame(frame);
+  }
+  function stopLoop(){
+    if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
+    stages.forEach(function(s, i){        // settle flat so nothing is left skewed
+      ch[i].flow = ''; ch[i].skew = ''; ch[i].repel = '';
+      paint(i);
+    });
+  }
+
+  function frame(){
+    rafId = requestAnimationFrame(frame);
+    if(reduced || !inView || flipping || !desktop){ vel *= 0.85; return; }
+
+    // read phase
+    var rects = stages.map(function(s){ return s.getBoundingClientRect(); });
+    var halfVW = window.innerWidth / 2;
+    vel *= 0.88;
+    var sk = Math.max(-2.2, Math.min(2.2, vel * 0.05));
+
+    // write phase
+    stages.forEach(function(s, i){
+      var r = rects[i];
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+
+      ch[i].flow = 'rotateY(' + (((cx - halfVW) / halfVW) * -5.5).toFixed(2) + 'deg)';   // 5
+      ch[i].skew = Math.abs(sk) > 0.02 ? 'skewY(' + sk.toFixed(2) + 'deg)' : '';          // 4
+
+      var rp = '';                                                                        // 7
+      if(mx !== null){
+        var dx = cx - mx, dy = cy - my, d = Math.sqrt(dx * dx + dy * dy);
+        if(d < 250 && d > 0.1){
+          var f = (1 - d / 250) * 15;
+          rp = 'translate(' + ((dx / d) * f).toFixed(1) + 'px,' + ((dy / d) * f).toFixed(1) + 'px)';
+        }
+      }
+      ch[i].repel = rp;
+      paint(i);
+    });
+  }
+
+  /* ---------- 6. Infinite course ticker ---------- */
+  var row = tickData.map(function(o){
+    return '<span class="tick-item"><b>' + esc(o.t) + '</b><i>' + esc(o.p) + '</i><u>Enroll →</u></span>';
+  }).join('');
+  var tick = document.createElement('div');
+  tick.className = 'course-ticker';
+  var track = document.createElement('div');
+  track.className = 'acts-ticker';
+  track.innerHTML = row + row;   // duplicated so the loop is seamless
+  tick.appendChild(track);
+  if(grid.nextSibling) grid.parentNode.insertBefore(tick, grid.nextSibling);
+  else grid.parentNode.appendChild(tick);
+  tick.addEventListener('click', function(e){
+    if(e.target.closest('.tick-item')) goEnquire();
+  });
 })();
 </script>
 </body>
