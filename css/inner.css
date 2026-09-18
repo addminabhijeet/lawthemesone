@@ -36,6 +36,60 @@ main{display:block}
 .crumbs a:hover{text-decoration:underline}
 .crumbs [aria-current]{color:#f5efdd}
 
+/* ---------- floating hero art: each page's banner gets an illustration that matches its content ---------- */
+/* The page is recognised by the section that follows its banner, so no markup changes were needed. */
+.page-hero{--hero-main:none;--hero-accent:none;--gut:clamp(84px,15vw,210px)}
+.page-hero:has(+ #about){--hero-main:url(../images/hero/about-us.svg);--hero-accent:url(../images/hero/accent-laurel.svg)}
+.page-hero:has(+ #acts){--hero-main:url(../images/hero/acts.svg);--hero-accent:url(../images/hero/accent-sparkles.svg)}
+.page-hero:has(+ #rules){--hero-main:url(../images/hero/rules.svg);--hero-accent:url(../images/hero/accent-rings.svg)}
+.page-hero:has(+ #inquiry){--hero-main:url(../images/hero/legal-knowledge.svg);--hero-accent:url(../images/hero/accent-sparkles.svg)}
+.page-hero:has(+ #courses){--hero-main:url(../images/hero/course.svg);--hero-accent:url(../images/hero/accent-laurel.svg)}
+.page-hero:has(+ #notes){--hero-main:url(../images/hero/copys.svg);--hero-accent:url(../images/hero/accent-sparkles.svg)}
+.page-hero:has(+ #client){--hero-main:url(../images/hero/clientele.svg);--hero-accent:url(../images/hero/accent-laurel.svg)}
+.page-hero:has(+ #exams){--hero-main:url(../images/hero/govt-exams.svg);--hero-accent:url(../images/hero/accent-rings.svg)}
+.page-hero:has(+ #gallery){--hero-main:url(../images/hero/gallery.svg);--hero-accent:url(../images/hero/accent-sparkles.svg)}
+.page-hero:has(+ #contact){--hero-main:url(../images/hero/contact-us.svg);--hero-accent:url(../images/hero/accent-rings.svg)}
+@keyframes heroFloatA{0%,100%{transform:translateY(-50%) rotate(-2.5deg)}50%{transform:translateY(calc(-50% - 14px)) rotate(2.5deg)}}
+@keyframes heroFloatB{0%,100%{transform:translateY(-50%) rotate(3deg) scale(1)}50%{transform:translateY(calc(-50% + 12px)) rotate(-3deg) scale(1.06)}}
+@media(min-width:641px){
+  /* keep the title clear of the art: reserve a gutter on both sides of the banner text */
+  .page-hero .wrap{padding-inline:calc(18px + var(--gut))}
+  .page-hero::before,.page-hero::after{
+    content:'';position:absolute;z-index:1;pointer-events:none;aspect-ratio:1;
+    background-repeat:no-repeat;background-position:center;background-size:contain;
+    transform:translateY(-50%);will-change:transform;
+  }
+  .page-hero::after{
+    background-image:var(--hero-main);top:50%;right:max(18px,calc((100% - 1220px)/2 + 18px));
+    width:min(calc(var(--gut) - 36px),168px);
+    filter:drop-shadow(0 8px 22px rgba(212,175,55,.38));
+    animation:heroFloatA 6.5s ease-in-out infinite;
+  }
+  .page-hero::before{
+    background-image:var(--hero-accent);top:46%;left:max(18px,calc((100% - 1220px)/2 + 18px));
+    width:min(calc((var(--gut) - 36px) * .62),104px);opacity:.92;
+    filter:drop-shadow(0 6px 16px rgba(212,175,55,.32));
+    animation:heroFloatB 8s ease-in-out -2.5s infinite;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  /* the theme's global reset uses the * selector, which never matches ::before / ::after */
+  .page-hero::before,.page-hero::after{animation:none}
+}
+/* About Us: a graduate's cap and diploma beside the scales, in place of the laurel (it is about aspiring legal professionals) */
+.page-hero:has(+ #about){--hero-accent:url(../images/hero/accent-graduate.svg)}
+
+/* Every other page: a left-hand accent drawn from that page's own content, replacing the generic sparkle / ring / laurel decorations */
+.page-hero:has(+ #acts){--hero-accent:url(../images/hero/accent-scroll.svg)}
+.page-hero:has(+ #rules){--hero-accent:url(../images/hero/accent-checklist.svg)}
+.page-hero:has(+ #inquiry){--hero-accent:url(../images/hero/accent-question.svg)}
+.page-hero:has(+ #courses){--hero-accent:url(../images/hero/accent-books.svg)}
+.page-hero:has(+ #notes){--hero-accent:url(../images/hero/accent-download.svg)}
+.page-hero:has(+ #client){--hero-accent:url(../images/hero/accent-quote.svg)}
+.page-hero:has(+ #exams){--hero-main:url(../images/hero/govt-building.svg);--hero-accent:url(../images/hero/accent-medal.svg)}
+.page-hero:has(+ #gallery){--hero-accent:url(../images/hero/accent-frame.svg)}
+.page-hero:has(+ #contact){--hero-accent:url(../images/hero/accent-pin.svg)}
+
 /* ---------- shared two-column block ---------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center;position:relative;z-index:1}
 .split .section-title{text-align:left}
