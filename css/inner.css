@@ -1,0 +1,231 @@
+/* Inner pages: additive layer on top of css/site.css (the index.html theme). Uses the theme's own tokens. */
+
+.skip-link{position:absolute;left:12px;top:-64px;z-index:100000;background:var(--black);color:var(--gold-light);
+  padding:11px 18px;border-radius:0 0 8px 8px;font-weight:700;font-size:13px;transition:top .2s}
+.skip-link:focus{top:0}
+main{display:block}
+
+/* About Us carries a dropdown (Client); its caret adds ~13px to a tight header, so trim the 7 gaps by 2px each and the logo keeps its width */
+@media(min-width:1025px){.nav-menu{gap:10px}}
+@media(min-width:1025px) and (max-width:1200px){.nav-menu{gap:8px}}
+@media(min-width:1025px) and (max-width:1082px){.nav-menu{gap:6px}}
+
+/* current page in the navbar; plain-links fallback shown only if navbar.html / footer.html cannot be loaded */
+.nav-menu > li > a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--gold)}
+.mobile-menu a[aria-current="page"]{font-weight:700;background:var(--gold-pale)}
+.fallback-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;padding:14px 18px;background:var(--white);border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
+.fallback-foot{padding:22px 18px;text-align:center;background:#12100c;color:#d4c5a9;font-size:13px}
+
+/* ---------- page banner (the inner-page counterpart of .hero) ---------- */
+.page-hero{
+  position:relative;overflow:hidden;color:#f5efdd;text-align:center;
+  background:linear-gradient(125deg,#0d0b08 0%,#1c1913 32%,#3a3120 58%,#1c1913 80%,#0d0b08 100%);
+  background-size:320% 320%;animation:heroShift 22s ease infinite;
+  padding:clamp(40px,7vw,68px) 0 clamp(36px,6vw,58px);
+}
+.page-hero .wrap{position:relative;z-index:2}
+.page-hero h1{
+  font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,5vw,52px);line-height:1.12;
+  background:linear-gradient(135deg,#f7e9b4 0%,#d4af37 42%,#f0d97d 70%,#b8952e 100%);
+  background-size:220% auto;background-position:-220% center;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 7s linear infinite;text-wrap:balance;
+}
+.crumbs{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:13px;color:#cfc7ae}
+.crumbs a{color:var(--gold-light)}
+.crumbs a:hover{text-decoration:underline}
+.crumbs [aria-current]{color:#f5efdd}
+
+/* ---------- shared two-column block ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center;position:relative;z-index:1}
+.split .section-title{text-align:left}
+.copy .eyebrow{margin-bottom:14px}
+.copy p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:14px}
+.copy .btn{width:max-content;margin-top:8px}
+.check-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;list-style:none;margin:18px 0 20px}
+.check-list li{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--ink);line-height:1.4}
+.check-list li::before{
+  content:"✓";flex-shrink:0;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  background:var(--grad-gold);color:var(--black);font-size:12px;font-weight:800;
+}
+.media-frame img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.media-stack{position:relative;padding-bottom:64px}
+.media-stack .m1{width:80%}
+.media-stack .m2{position:absolute;right:0;bottom:0;width:46%;border:6px solid var(--white)}
+.exp-badge{
+  position:absolute;left:14px;bottom:6px;z-index:2;text-align:center;
+  background:var(--grad-gold);color:var(--black);border-radius:12px;padding:14px 18px;
+  box-shadow:0 14px 34px rgba(212,175,55,.38);
+}
+.exp-badge b{display:block;font:800 30px/1 'Playfair Display',serif}
+.exp-badge span{display:block;margin-top:4px;font-size:12px;font-weight:600;max-width:150px;line-height:1.35}
+
+/* ---------- history tabs (sits on the dark .how-section) ---------- */
+.tabs-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:30px;position:relative;z-index:1}
+.tabs-nav button{
+  min-width:64px;min-height:44px;padding:10px 20px;border-radius:30px;cursor:pointer;
+  border:1.5px solid rgba(212,175,55,.5);background:transparent;color:var(--gold-light);
+  font:700 14px 'Poppins',sans-serif;transition:all .3s;
+}
+.tabs-nav button:hover{background:rgba(212,175,55,.14)}
+.tabs-nav button[aria-selected="true"]{background:var(--grad-gold);color:var(--black);border-color:transparent}
+.tab-panel{display:none;position:relative;z-index:1}
+.tab-panel.active{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,44px);align-items:center;animation:fadeInScale .5s both}
+.tab-panel img{width:100%;height:auto;border-radius:14px;border:1px solid rgba(212,175,55,.3)}
+.tab-panel h3{font-family:'Playfair Display',serif;font-size:clamp(20px,2.6vw,28px);color:#f5efdd;margin-bottom:14px;line-height:1.25}
+.tab-panel p{color:#d4c5a9;font-size:14.5px;line-height:1.8;margin-bottom:12px}
+.tab-panel p strong{color:var(--gold-light);display:block;font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+
+/* ---------- team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.team-card{
+  background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:center;
+  box-shadow:var(--shadow-soft);transition:all .42s cubic-bezier(.22,1,.36,1);
+}
+.team-card:hover{transform:translateY(-7px);box-shadow:0 22px 44px rgba(212,175,55,.2);border-color:rgba(212,175,55,.42)}
+.team-card img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:var(--gold-pale)}
+.team-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--black);padding:16px 14px 2px}
+.team-card p{font-size:13px;color:var(--muted);padding:0 14px 18px}
+
+/* ---------- filter bar + accordion lists (acts, rules, notes, exams) ---------- */
+.filter-bar{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:980px;margin:0 auto 30px;position:relative;z-index:5;
+  background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px;box-shadow:var(--shadow-soft);
+}
+.filter-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:14px 14px 0 0;background:var(--grad-gold)}
+.filter-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.filter-field>label{display:block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+.dd{position:relative}
+.dd-btn{
+  width:100%;min-height:44px;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;cursor:pointer;
+  padding:11px 13px;border:1.4px solid var(--line);border-radius:7px;background:var(--cream);color:var(--ink);
+  font:500 13px 'Poppins',sans-serif;transition:all .3s;
+}
+.dd-btn:hover,.dd.open .dd-btn{border-color:var(--gold);background:var(--white)}
+.dd-btn .chev{font-size:11px;color:var(--gold-dark);transition:transform .25s}
+.dd.open .dd-btn .chev{transform:rotate(180deg)}
+.dd-menu{
+  display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;max-height:320px;overflow:auto;
+  list-style:none;padding:6px;background:var(--white);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 18px 40px rgba(30,26,16,.16);
+}
+.dd.open .dd-menu{display:block}
+.dd-menu li{padding:11px 12px;border-radius:7px;cursor:pointer;font-size:13.5px;color:var(--ink);line-height:1.35}
+.dd-menu li:hover,.dd-menu li[aria-selected="true"]{background:var(--gold-pale)}
+.dd-menu li[aria-selected="true"]{font-weight:700}
+.dd-menu li[data-depth="1"]{padding-left:30px;font-size:13px;color:var(--muted)}
+.dd-menu li[data-depth="2"]{padding-left:46px;font-size:13px;color:var(--muted)}
+
+.res-list{max-width:980px;margin:0 auto;display:grid;gap:16px;position:relative;z-index:1}
+.res-cat{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-soft)}
+.res-cat-head{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:58px;padding:14px 18px;cursor:pointer;
+  background:linear-gradient(135deg,var(--white) 0%,var(--gold-pale) 100%);border:0;text-align:left;color:var(--black);
+  font:700 17px/1.3 'Playfair Display',serif;
+}
+.res-cat-head .count{margin-left:auto;font:600 12px 'Poppins',sans-serif;color:var(--muted);white-space:nowrap}
+.res-cat-head .chev{font-size:12px;color:var(--gold-dark);transition:transform .3s}
+.res-cat-head[aria-expanded="false"] .chev{transform:rotate(-90deg)}
+.res-cat-body{padding:4px 18px 18px}
+.res-cat-body[hidden]{display:none}
+.res-sub h3{margin:18px 0 10px;font:700 12px 'Poppins',sans-serif;letter-spacing:.7px;text-transform:uppercase;color:var(--muted)}
+.res-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.res-grid .list-card{cursor:default}
+.res-empty{padding:22px 4px;color:var(--muted);font-size:14px}
+.res-none{max-width:980px;margin:0 auto;text-align:center;padding:36px 18px;color:var(--muted);font-size:15px}
+.res-actions{display:flex;gap:8px;flex-wrap:wrap}
+.res-actions a{
+  display:inline-flex;align-items:center;min-height:36px;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--gold);color:var(--ink);transition:all .3s;
+}
+.res-actions a:hover{background:var(--gold-pale)}
+.res-actions a.primary{background:var(--grad-gold);border-color:transparent}
+.res-actions a.primary:hover{filter:brightness(1.06)}
+[hidden]{display:none!important}
+
+/* ---------- courses ---------- */
+.course-card[hidden]{display:none}
+.course-card.show{animation:fadeInScale .4s both}
+.course-body p.course-note{flex:0 0 auto;margin-bottom:12px;font-size:12.5px}
+.course-foot{align-items:flex-end}
+.course-price small{display:block;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--muted)}
+.course-disc{font-size:12.5px;color:var(--muted);text-align:right;line-height:1.3}
+.course-disc strong{display:block;font-size:14px;color:#b42318}
+.course-body .course-foot{margin-top:auto}
+.course-actions{display:flex;gap:10px;margin-top:14px}
+.course-actions .btn{flex:1;justify-content:center;min-height:44px;padding:10px 12px;font-size:13px}
+.btn-line{background:transparent;color:var(--ink);border:1.5px solid var(--gold)}
+.btn-line:hover{background:var(--gold-pale);transform:translateY(-3px)}
+.pager{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:36px;list-style:none;position:relative;z-index:1}
+.pager button{
+  min-width:44px;min-height:44px;padding:0 12px;border-radius:8px;cursor:pointer;background:var(--white);color:var(--ink);
+  border:1.5px solid rgba(212,175,55,.5);font:700 14px 'Poppins',sans-serif;transition:all .3s;
+}
+.pager button:hover:not(:disabled){background:var(--gold-pale)}
+.pager button[aria-current="page"]{background:var(--grad-gold);border-color:transparent;color:var(--black)}
+.pager button:disabled{opacity:.45;cursor:not-allowed}
+
+/* ---------- gallery lightbox ---------- */
+.gallery-grid .album{display:block}
+.lightbox{position:fixed;inset:0;z-index:100001;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(10,9,7,.93)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:min(92vw,1100px);max-height:80vh;width:auto;height:auto;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lb-btn{
+  position:absolute;min-width:48px;min-height:48px;border-radius:50%;cursor:pointer;
+  border:1.5px solid rgba(212,175,55,.6);background:rgba(18,16,12,.75);color:var(--gold-light);font-size:22px;line-height:1;
+}
+.lb-btn:hover{background:rgba(212,175,55,.2)}
+.lb-close{top:18px;right:18px}
+.lb-prev{left:18px;top:50%;transform:translateY(-50%)}
+.lb-next{right:18px;top:50%;transform:translateY(-50%)}
+.lb-cap{position:absolute;left:0;right:0;bottom:20px;text-align:center;color:#d4c5a9;font-size:13px}
+
+/* ---------- forms on inner pages: show the labels the Laravel forms had ---------- */
+.inner-page .form-card .field label{display:block;font-size:13px;font-weight:600;color:var(--ink)}
+/* the theme floats .form-section labels over the input (they were hidden there); here they sit above it */
+.inner-page .form-section .field label{position:static;top:auto;left:auto;padding:0;background:none;pointer-events:auto;transition:none}
+.req{color:#b42318;margin-left:2px}
+.form-card h3.form-title{font-family:'Playfair Display',serif;font-size:clamp(20px,2.4vw,26px);color:var(--black);margin-bottom:6px}
+.form-card p.form-lead{font-size:13.5px;color:var(--muted);margin-bottom:20px}
+.form-status{margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--gold-pale);border-left:3px solid var(--gold);font-size:13px;color:var(--ink);line-height:1.6}
+.field input[type="file"]{padding:9px 10px}
+.form-note .disc-title{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.form-section .form-card,.contact-section .form-card{max-width:840px}
+.contact-section .form-card{max-width:none}
+
+/* ---------- contact + clientele ---------- */
+.contact-items .contact-item:last-child:nth-child(odd){grid-column:1/-1}
+.contact-item a{color:var(--ink);overflow-wrap:anywhere}
+.contact-item a:hover{color:var(--gold-dark);text-decoration:underline}
+.contact-intro h2{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,32px);color:var(--black);line-height:1.25;margin-bottom:14px}
+.contact-intro .btn{width:max-content;margin:6px 0 22px}
+.testi-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.map-frame{margin-top:44px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-soft);aspect-ratio:16/7;background:var(--gold-pale);position:relative;z-index:1}
+.map-frame iframe{display:block;width:100%;height:100%;border:0}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .split{grid-template-columns:1fr}
+  .tab-panel.active{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .media-stack{max-width:520px;margin-inline:auto}
+}
+@media(max-width:700px){
+  .filter-bar{grid-template-columns:1fr;padding:18px}
+  .testi-list{grid-template-columns:1fr}
+  .map-frame{aspect-ratio:4/3}
+}
+@media(max-width:560px){
+  .check-list{grid-template-columns:1fr}
+  .team-grid{gap:14px}
+  .res-cat-head{font-size:15.5px;padding:13px 14px}
+  .res-cat-body{padding:2px 12px 14px}
+  .course-actions{flex-direction:column}
+  .copy .btn,.contact-intro .btn{width:100%;justify-content:center}
+}
+@media(max-width:420px){
+  .team-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .course-card.show,.tab-panel.active{animation:none}
+}
