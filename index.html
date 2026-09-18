@@ -3476,6 +3476,37 @@ if(prefersReducedMotion){
   });
 })();
 
+/* ---- text shine fix: same !important cascade issue as bg-position ---- */
+(function(){
+  var grad = 'linear-gradient(135deg,#f7e9b4 0%,#d4af37 42%,#f0d97d 70%,#b8952e 100%)';
+  var DUR = 7000;
+  var els = [];
+  [
+    '.kn-section .section-title',
+    '.how-section .section-title',
+    '.site-footer .footer-tag',
+    '.site-footer .footer-col h4'
+  ].forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){
+      el.style.setProperty('background-image', grad, 'important');
+      el.style.setProperty('background-size', '220% auto', 'important');
+      el.style.setProperty('-webkit-background-clip', 'text', 'important');
+      el.style.setProperty('background-clip', 'text', 'important');
+      el.style.setProperty('-webkit-text-fill-color', 'transparent', 'important');
+      el.style.setProperty('color', 'transparent', 'important');
+      els.push(el);
+    });
+  });
+  var start = Date.now();
+  setInterval(function(){
+    var e = (Date.now() - start) % DUR;
+    var p = (-220 + (e / DUR) * 440).toFixed(1);
+    els.forEach(function(el){
+      el.style.setProperty('background-position', p + '% center', 'important');
+    });
+  }, 50);
+})();
+
 /* ---- hero-style heroShift for kn-section, how-section, site-footer ---- */
 (function(){
   var grad = 'linear-gradient(125deg,#0d0b08 0%,#1c1913 32%,#3a3120 58%,#1c1913 80%,#0d0b08 100%)';
