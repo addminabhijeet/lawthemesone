@@ -1582,6 +1582,313 @@ body.enroll-bar-on .counsel-pop{bottom:156px}
 @media(max-width:600px){
   .cta-ptr{display:none}
 }
+
+/* ================================================================
+   DESIGN FIX LAYER — appended only. No existing rule, no markup and
+   no script is modified; every declaration below either adds a new
+   property or beats an earlier one on source order / specificity.
+   ================================================================ */
+
+/* ---- 1. FOOTER — the gold top edge and the ambient glow were both dead.
+   The pattern-cleanup block sets `display:none !important` on
+   .site-footer::before (which carried the 3px animated gold rule that
+   separated the footer from the page) and on .site-footer::after, which
+   also silently disabled the whole footer-enhancement ambience declared
+   further down. Neither pseudo-element can be revived without editing
+   those rules, so both layers are rebuilt as backgrounds on the element
+   itself. ---- */
+.site-footer{
+  background:
+    linear-gradient(90deg,#b8952e 0%,#f0d97d 28%,#d4af37 52%,#f7e9b4 76%,#b8952e 100%) top left/100% 3px no-repeat,
+    radial-gradient(circle at 12% 14%, rgba(212,175,55,.16) 0%, transparent 55%),
+    radial-gradient(circle at 88% 92%, rgba(240,217,125,.11) 0%, transparent 52%),
+    linear-gradient(135deg,#0d0b08 0%,#1c1913 50%,#0d0b08 100%) !important;
+}
+
+/* ---- 2. FOOTER — every floating widget docks to the bottom of the
+   viewport and landed straight on the legal links and the copyright:
+   the WhatsApp button (bottom:20px, and much wider once it idles open),
+   the progress ring in "Enroll Now" mode (bottom:26px) and the sticky
+   enrolment bar (66px tall, which covered the bottom row completely).
+   Reserve a safe zone under them; the footer background fills it. ---- */
+.site-footer{padding-bottom:92px}
+body.enroll-bar-on .site-footer{padding-bottom:166px}
+
+/* ---- 3. Colour emoji (envelope, pin, phone, speech bubble) rendered in
+   their native pink/red/blue — the only non-gold colour in the palette,
+   and the loudest thing in the footer. Map them onto the theme: a bright
+   gold on the dark footer, a deeper bronze on the light contact tiles. ---- */
+.footer-contact-ico{filter:grayscale(1) sepia(1) saturate(4.5) hue-rotate(-6deg) brightness(1.1)}
+.contact-ico{filter:grayscale(1) sepia(1) saturate(6) hue-rotate(-14deg) brightness(.82) contrast(1.15)}
+
+/* ---- 4. FOOTER — footerGlow is declared !important, so all four contact
+   icons pulsed non-stop and the hover glow in the original rule could
+   never win against it. Park the animation on its first keyframe (no
+   glow) and let hover/focus play it. ---- */
+.footer-contact-ico{animation-play-state:paused !important}
+.footer-contact-item:hover .footer-contact-ico,
+.footer-contact-item:focus-within .footer-contact-ico{animation-play-state:running !important}
+
+/* ---- 5. FOOTER — the column rules were border-left on the grid item, so
+   they landed hard against the heading text instead of in the middle of
+   the 25px gutter, and the matching padding-left made columns 2 and 3
+   narrower than column 1 so nothing lined up on a common grid. Centre
+   the rule in the gutter and give every column the same box. ---- */
+@media(min-width:1025px){
+  .footer-col{position:relative}
+  .footer-col + .footer-col{border-left-color:transparent;padding-left:0}
+  .footer-col + .footer-col::before{
+    content:'';position:absolute;top:4px;bottom:4px;left:-12.5px;width:1px;
+    background:linear-gradient(180deg,transparent 0%,rgba(212,175,55,.24) 16%,
+               rgba(212,175,55,.24) 84%,transparent 100%);
+  }
+  /* Programs runs nine items deep, which left ~100px of dead space under
+     the logo and ~80px under Quick Links. Two tracks close the row up. */
+  .footer-grid:first-of-type .footer-col:nth-child(3) ul{columns:2;column-gap:20px}
+  .footer-grid:first-of-type .footer-col:nth-child(3) li{break-inside:avoid}
+}
+
+/* ---- 6. FOOTER — the tagline at a flat 29px was the largest type on the
+   page after the hero and drove column 1's height on its own. ---- */
+.footer-tag{font-size:clamp(19px,1.5vw,23px)}
+
+/* ---- 7. FOOTER — below 1025px the two-column grid left orphans (Programs
+   alone on its row, Social Media alone on its), and below 769px every
+   column stacked into one very long strip. Let the tracks fit the space
+   and give the logo a full-width row of its own. ---- */
+@media(max-width:1024px) and (min-width:561px){
+  .footer-grid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px}
+  .footer-logo{grid-column:1/-1}
+}
+@media(max-width:768px){
+  .site-footer{padding-bottom:88px}
+  body.enroll-bar-on .site-footer{padding-bottom:196px}
+}
+
+/* ---- 8. BUTTONS — .btn ends on display:flex (the second declaration in
+   its own rule overrides the inline-block above it), so any button that
+   is not already a flex item stretched to the full container width. All
+   seven "View All …" section CTAs rendered as 1184px bars with the label
+   pinned to the left edge. ---- */
+.btn{display:inline-flex;justify-content:center;text-align:center}
+.section-cta .btn{margin-left:auto;margin-right:auto}
+
+/* ---- 9. HEADER — the dropdown caret is a ::before on an inline-block
+   link, so it printed to the LEFT of the label. ::after is already the
+   hover underline, so reorder the caret rather than move it. ---- */
+.nav-menu .has-drop > a{display:inline-flex;align-items:center}
+.nav-menu .has-drop > a::before{order:2}
+
+/* ---- 10. HEADER — the dropdown's resting transition is 1.2s, so menus
+   hung on screen for over a second after the pointer left. ---- */
+.nav-menu li.has-drop .dropdown{transition:opacity .3s ease,visibility .3s ease,transform .3s ease}
+
+/* ---- 11. FORMS — the native file control was the one unstyled widget
+   left in the enquiry form. ---- */
+.field input[type=file]{padding:7px 10px;cursor:pointer}
+.field input[type=file]::file-selector-button{
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;
+  color:var(--black);background:var(--grad-gold);
+  border:none;border-radius:6px;padding:8px 16px;margin-right:12px;
+  cursor:pointer;transition:filter .3s ease,box-shadow .3s ease;
+}
+.field input[type=file]::file-selector-button:hover{
+  filter:brightness(1.07);box-shadow:0 6px 16px rgba(212,175,55,.34);
+}
+
+/* ---- 12. Nothing in the sheet gave keyboard focus a visible state. ---- */
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.site-footer a:focus-visible,.enroll-bar a:focus-visible,
+.wa-float:focus-visible{outline-color:var(--gold-light)}
+
+/* ---- 13. MOBILE TYPE — LEGAL KNOWLEDGE + HOW IT WORKS.
+   .kn-card h5 is clamp(7px,1.5vw,10px) and .kn-card span is
+   clamp(5px,1.2vw,7.5px); on a 375px screen the viewport term collapses
+   and both bottom out at their minimums, so a full-width card carried a
+   7px title over a 5px label. The how-cards use flat desktop sizes that
+   stay small once the grid drops to one column. Re-scale both for the
+   width they actually get. ---- */
+@media(max-width:768px){
+  .kn-card{min-height:auto;padding:15px 12px}
+  .kn-card h5{font-size:13.5px;line-height:1.35;margin-bottom:5px}
+  .kn-card span{font-size:10px;letter-spacing:.9px}
+  .how-card{padding:26px 22px}
+  .how-num{font-size:34px;margin-bottom:10px}
+  .how-card h3{font-size:19px;margin-bottom:7px}
+  .how-card p{font-size:14px;line-height:1.75}
+}
+@media(max-width:600px){
+  .kn-card{min-height:auto;padding:16px 14px}
+  .kn-card h5{font-size:15px}
+  .kn-card span{font-size:10.5px}
+}
+@media(max-width:480px){
+  .kn-card{min-height:auto;padding:15px 13px}
+  .kn-card h5{font-size:14.5px}
+  .kn-card span{font-size:10px}
+  .how-card{padding:24px 18px}
+  .how-card h3{font-size:18px}
+  .how-card p{font-size:13.5px}
+}
+
+/* ---- 14. The reduced-motion block resets animation with `*`, which the
+   later !important animations outrank on specificity, so they carried on
+   playing. Stop them by name, and give the gradient-clipped headings a
+   solid fill so they stay readable once the shine is frozen. ---- */
+@media(prefers-reduced-motion:reduce){
+  .footer-contact-ico,.footer-logo img,.footer-tag,.footer-col h4,
+  .kn-section::before,.how-section::before,
+  .kn-section .section-title,.how-section .section-title,
+  .wa-float,.progress-wrap.cta-mode,.enroll-bar-text b,
+  .carousel-dots span.active{animation:none !important}
+  .footer-tag,.footer-col h4,
+  .kn-section .section-title,.how-section .section-title{
+    background:none !important;
+    -webkit-text-fill-color:var(--gold-light) !important;
+  }
+}
+
+/* ---- 15. MOBILE — WhatsApp float position.
+   At rest it sat at left:12px / bottom:12px while the progress ring on the
+   right sat at bottom:26px, so the pair read as crooked and the button hugged
+   the screen edge, which on a modern phone puts it under the gesture bar.
+   With the enrolment bar up it was worse: the stacking offsets assume a ~90px
+   bar, but the bar wraps to 117px below 601px and to 180px below 361px, so the
+   button sat ON the bar at 375px and disappeared behind it entirely at 320px.
+   Mirror the ring at rest, and lift both clear of the bar at each width where
+   it actually wraps (measured: 89px / 117px / 180px, plus a 12px gap). ---- */
+@media(max-width:600px){
+  .wa-float{left:26px;bottom:calc(26px + env(safe-area-inset-bottom,0px))}
+  .progress-wrap{bottom:calc(26px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:768px){
+  body.enroll-bar-on .wa-float,
+  body.enroll-bar-on .progress-wrap{bottom:101px}
+}
+@media(max-width:600px){
+  body.enroll-bar-on .wa-float,
+  body.enroll-bar-on .progress-wrap{bottom:129px}
+}
+@media(max-width:360px){
+  body.enroll-bar-on .wa-float,
+  body.enroll-bar-on .progress-wrap{bottom:192px}
+  body.enroll-bar-on .counsel-pop{bottom:192px}
+}
+
+/* ---- 16. FOOTER — logo halo and section glow, matched to the hero.
+   The footer logo ran `logoGlow` on a 2.8s loop, so its halo pulsed
+   non-stop; the hero logo carries one steady drop-shadow instead. And
+   the footer glowed as two fixed radial hot-spots in opposite corners
+   plus a gold rim, where the hero glows as a single slow warm wash
+   drifting across the whole section (heroShift, 22s). Give the footer
+   the hero's treatment: a steady halo on the logo, and the hero's warm
+   band sweeping across the whole footer on the same 22s ease loop.
+
+   The hero drives that sweep with `background-position`, which the footer
+   cannot reuse: two earlier rules pin the footer's background with an
+   `!important` shorthand, and an important author declaration outranks a
+   CSS animation, so an animated position would never move. The sweep is
+   therefore driven by a registered custom property that slides the warm
+   stop through the gradient instead — same motion, no position needed.
+   `--fw` is also set as a normal declaration so the gradient still
+   resolves where @property is unsupported. The gold top edge that fix 1
+   carried as a background layer moves onto a border to keep the
+   background a single layer. ---- */
+.footer-logo img{
+  animation:none;
+  filter:drop-shadow(0 10px 30px rgba(212,175,55,.42));
+}
+@property --fw{syntax:'<percentage>';inherits:false;initial-value:-10%}
+@keyframes footerHeroWash{
+  0%{--fw:-10%}
+  50%{--fw:110%}
+  100%{--fw:-10%}
+}
+.site-footer{
+  --fw:-10%;
+  background-image:linear-gradient(125deg,
+    #0d0b08 calc(var(--fw) - 55%),
+    #1c1913 calc(var(--fw) - 22%),
+    #3a3120 var(--fw),
+    #1c1913 calc(var(--fw) + 22%),
+    #0d0b08 calc(var(--fw) + 55%)) !important;
+  background-color:#0d0b08 !important;
+  /* fix 1 sized its first layer 100%x3px for the gold bar it carried;
+     that size survives here, so reset it or the wash renders as a strip */
+  background-size:auto !important;
+  background-repeat:no-repeat !important;
+  background-position:0 0 !important;
+  box-shadow:none !important;
+  border-top:3px solid transparent;
+  border-image:linear-gradient(90deg,#b8952e 0%,#f0d97d 28%,#d4af37 52%,#f7e9b4 76%,#b8952e 100%) 1;
+  animation:footerHeroWash 22s ease infinite;
+}
+@media(prefers-reduced-motion:reduce){
+  .site-footer{animation:none !important}
+}
+
+/* ---- 17. FOOTER — centre every column on one axis.
+   The footer was left-aligned throughout: headings and their gold
+   underline segment sat hard left, contact rows ran icon-beside-text,
+   the social row packed left, and the bottom bar pushed the legal links
+   and the copyright to opposite edges. Centre all of it.
+   Three left-anchored details have to follow the text or they break the
+   centre line: the heading's gold segment, the link chevron (it grows
+   inline, so on a centred link it shoved the label sideways on hover —
+   lifted out of flow here), and the two horizontal hover nudges, which
+   pulled centred items off axis. ---- */
+.site-footer{text-align:center}
+
+/* heading rule segment, centred under the centred label */
+.footer-col h4::after{left:50%;transform:translateX(-50%)}
+
+/* The logo image is display:block from the global img reset, so the
+   column's text-align could never centre it — it rendered 328px wide in
+   a 378px column and sat 25px left of the axis, even before this change. */
+.footer-logo img{margin-left:auto;margin-right:auto}
+
+/* links: chevron out of flow, so hovering cannot shift the centred text */
+.footer-col li a{position:relative}
+.footer-col li a::before{
+  position:absolute;right:100%;top:0;
+  width:auto;overflow:visible;margin-right:4px;
+  transition:opacity .3s ease;
+}
+.footer-col li a:hover::before{width:auto;margin-right:4px}
+.footer-col li a:hover{transform:none}
+
+/* contact rows: stack the icon above its text instead of beside it */
+.footer-contact-item{flex-direction:column;align-items:center;gap:7px}
+.footer-contact-item:hover{transform:translateY(-3px)}
+
+/* social row and bottom bar */
+.social-row{justify-content:center}
+.footer-bottom{flex-direction:column;justify-content:center;gap:9px}
+.footer-links{justify-content:center}
+
+/* ---- 18. CONTACT FORM — it collapsed to its content width on phones.
+   `.form-card` carries `margin:0 auto`, and auto inline margins on a
+   GRID ITEM make it shrink-to-fit instead of stretching to its track.
+   The 2-column `.contact-layout` masks that on desktop, because the
+   card's max-content is wider than the track. Once the layout stacks
+   and `.form-row` drops to one column, max-content is just the widest
+   placeholder — so the card, its inputs and both the "Send Message" and
+   "WhatsApp Us" buttons squeezed to ~187px inside a 351px column, with
+   75px of dead space either side. An explicit width leaves the auto
+   margins no free space to absorb, so the card fills the track. ---- */
+@media(max-width:768px){
+  .contact-layout .form-card{width:100%;max-width:100%}
+}
+
+/* Programs keeps the two tracks fix 5 gave it to close the row's dead
+   space, but a full-width multicol left its items 99px off the column
+   axis. Shrink the list to its content and centre it as one block, so
+   both tracks sit symmetrically about the centre line. */
+@media(min-width:1025px){
+  .footer-grid:first-of-type .footer-col:nth-child(3) ul{
+    width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;
+  }
+}
 </style>
 </head>
 <body>
